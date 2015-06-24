@@ -42,9 +42,26 @@ List loadobj(std::vector< std::string > objfile) {
       std::vector<unsigned int> indices;
       std::vector<int> material_ids; // per-mesh material ID
     } mesh_t; */
-    sl[shapes[i].name]=List::create(MNAME(positions), MNAME(normals),
-                                    MNAME(texcoords), MNAME(indices),
-                                    MNAME(material_ids));
+    if((m.positions.size() % 3) !=0) {
+      stop ("Number of vertices is not a multiple of 3 for object", i);
+    }
+    const size_t nv = m.positions.size() / 3L;
+    const size_t nn = m.normals.size() / 3L;
+
+    const size_t nfaces=m.material_ids.size();
+    // number of vertices per face
+    const size_t nv_face=m.indices.size()/nfaces;
+
+    if((m.indices.size() % nv_face) != 0) {
+      stop("Number of vertices / mesh face is not constant in object", i);
+    }
+    List sli;
+    sli["positions"]=NumericMatrix(3L, nv, m.positions.begin());
+    sli["normals"]=NumericMatrix(3L, nn, m.normals.begin());
+    sli["texcoords"]=m.texcoords;
+    sli["indices"]=NumericMatrix(nv_face, nfaces, m.indices.begin());
+    sli["material_ids"]=m.material_ids;
+    sl[shapes[i].name]=sli;
   }
   for(unsigned int i=0; i<materials.size(); i++) {
     tinyobj::material_t m=materials[i];
