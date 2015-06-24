@@ -1,4 +1,4 @@
-Package: tinyobjloader
+Package: readobj
 Type: Package
 Title: Fast reader for 'Wavefront' OBJ 3D scene files
 Version: 0.1

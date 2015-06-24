@@ -31,7 +31,7 @@ a named list with items \code{shapes} and \code{materials}, each
 Read a Wavefront OBJ 3D scene file into an R list
 }
 \examples{
-cube=read.obj(system.file("obj/cube.obj", package = "tinyobjloader"))
+cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
 str(cube, max.level = 2)
 }
 

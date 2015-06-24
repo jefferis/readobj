@@ -2,4 +2,4 @@
 
 export(read.obj)
 import(Rcpp)
-useDynLib(tinyobjloader)
+useDynLib(readobj)

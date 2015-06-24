@@ -2,6 +2,6 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 loadobj <- function(thefile, basepath = "") {
-    .Call('tinyobjloader_loadobj', PACKAGE = 'tinyobjloader', thefile, basepath)
+    .Call('readobj_loadobj', PACKAGE = 'readobj', thefile, basepath)
 }
 

@@ -1,4 +1,4 @@
 library(testthat)
-library(tinyobjloader)
+library(readobj)
 
-test_check("tinyobjloader")
+test_check("readobj")

@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // loadobj
 List loadobj(std::string thefile, std::string basepath);
-RcppExport SEXP tinyobjloader_loadobj(SEXP thefileSEXP, SEXP basepathSEXP) {
+RcppExport SEXP readobj_loadobj(SEXP thefileSEXP, SEXP basepathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
