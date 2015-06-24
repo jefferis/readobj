@@ -1,6 +1,8 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+#include "tiny_obj_loader.h"
+
 // This is a simple function using Rcpp that creates an R list
 // containing a character vector and a numeric vector.
 //
@@ -10,7 +12,7 @@ using namespace Rcpp;
 //   http://adv-r.had.co.nz/Rcpp.html
 //
 // and browse examples of code using Rcpp at:
-// 
+//
 //   http://gallery.rcpp.org/
 //
 
