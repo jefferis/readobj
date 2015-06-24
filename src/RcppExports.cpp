@@ -5,14 +5,14 @@
 
 using namespace Rcpp;
 
-// loadob
-List loadob(std::vector< std::string > objfile);
-RcppExport SEXP tinyobjloader_loadob(SEXP objfileSEXP) {
+// loadobj
+List loadobj(std::vector< std::string > objfile);
+RcppExport SEXP tinyobjloader_loadobj(SEXP objfileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< std::vector< std::string > >::type objfile(objfileSEXP);
-    __result = Rcpp::wrap(loadob(objfile));
+    __result = Rcpp::wrap(loadobj(objfile));
     return __result;
 END_RCPP
 }

@@ -17,7 +17,7 @@ using namespace Rcpp;
 //
 
 // [[Rcpp::export]]
-List loadob(std::vector< std::string > objfile) {
+List loadobj(std::vector< std::string > objfile) {
   int num_strings = objfile.size();
   if(num_strings!=1) {
     stop("I can only read exactly one file!");
