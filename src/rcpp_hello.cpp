@@ -31,7 +31,7 @@ List loadobj(std::vector< std::string > objfile) {
   if (!err.empty()) {
     stop(err);
   }
-
+#define MNAME(X) Named(#X, m.X)
   List sl, ml;
   for(unsigned int i=0; i<shapes.size(); i++) {
     tinyobj::mesh_t m=shapes[i].mesh;
@@ -42,8 +42,9 @@ List loadobj(std::vector< std::string > objfile) {
       std::vector<unsigned int> indices;
       std::vector<int> material_ids; // per-mesh material ID
     } mesh_t; */
-    sl[shapes[i].name]=List::create(m.positions, m.normals, m.texcoords,
-                                   m.indices, m.material_ids);
+    sl[shapes[i].name]=List::create(MNAME(positions), MNAME(normals),
+                                    MNAME(texcoords), MNAME(indices),
+                                    MNAME(material_ids));
   }
   for(unsigned int i=0; i<materials.size(); i++) {
     tinyobj::material_t m=materials[i];
@@ -67,14 +68,15 @@ List loadobj(std::vector< std::string > objfile) {
         std::string normal_texname;
         std::map<std::string, std::string> unknown_parameter;
       } material_t; */
-    ml[m.name]=List::create(NumericVector::create(m.ambient[0], m.ambient[1], m.ambient[2]),
-                            NumericVector::create(m.diffuse[0], m.diffuse[1], m.diffuse[2]),
-                            NumericVector::create(m.specular[0], m.specular[1], m.specular[2]),
-                            NumericVector::create(m.transmittance[0], m.transmittance[1], m.transmittance[2]),
-                            NumericVector::create(m.emission[0], m.emission[1], m.emission[2]),
-                            m.shininess, m.ior, m.dissolve, m.illum,
-                            m.ambient_texname, m.diffuse_texname,
-                            m.specular_texname, m.normal_texname);
+    ml[m.name]=List::create(Named("ambient", NumericVector::create(m.ambient[0], m.ambient[1], m.ambient[2])),
+                            Named("diffuse", NumericVector::create(m.diffuse[0], m.diffuse[1], m.diffuse[2])),
+                            Named("specular", NumericVector::create(m.specular[0], m.specular[1], m.specular[2])),
+                            Named("transmittance", NumericVector::create(m.transmittance[0], m.transmittance[1], m.transmittance[2])),
+                            Named("emission", NumericVector::create(m.emission[0], m.emission[1], m.emission[2])),
+                            MNAME(shininess),
+                            MNAME(ior), MNAME(dissolve), MNAME(illum),
+                            MNAME(ambient_texname), MNAME(diffuse_texname),
+                            MNAME(specular_texname), MNAME(normal_texname));
   }
   List r;
   r["shapes"]=sl;
