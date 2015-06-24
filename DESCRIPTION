@@ -1,14 +1,17 @@
 Package: tinyobjloader
 Type: Package
-Title: An Rcpp based Wavefront obj loader
+Title: Fast reader for 'Wavefront' OBJ 3D scene files
 Version: 0.1
 Date: 2015-06-24
 Authors@R: c(
-    person("Gregory", "Jefferis", ,"jefferis@gmail.com", c("aut", "cre")),
-    person("Syoyo", "Fujita", , c("aut", "cph"))
+    person("Gregory", "Jefferis", email = "jefferis@gmail.com",
+    role = c("aut", "cph", "cre")),
+    person("Syoyo", "Fujita", role=c("aut", "cph"),
+    comment="tiny_obj_loader.* are copyright Syoyo Fujiata")
     )
-Description: wraps tinyobjloader C++ wavefron obj loader
-License: GPL-3
+Description: Wraps tiny_obj_loader C++ library for reading the 'Wavefront' OBJ
+    3D file format.
+License: BSD_2_clause + file LICENSE
 LazyData: TRUE
 Imports:
     Rcpp (>= 0.11.6)
