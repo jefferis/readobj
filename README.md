@@ -12,12 +12,12 @@ devtools::install_github("jefferis/readobj")
 library(readobj)
 
 # run examples
-example(read.obj)
+example("read.obj")
 
 # get overview help for package
 ?readobj
 # help for functions
-?xxx
+?read.obj
 
 # run tests
 library(testthat)
@@ -35,4 +35,6 @@ if (!require("devtools")) install.packages("devtools")
 devtools::install_github("jefferis/readobj")
 ```
 
-Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
+Note: MacOS X users will need a development environment (Xcode) to compile code.
+Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and
+[devtools](http://CRAN.R-project.org/package=devtools) to install this way.
