@@ -1,0 +1,14 @@
+Package: tinyobjloader
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1
+Date: 2015-06-24
+Author: Gregory Jefferis
+Maintainer: "Gregory Jefferis <jefferis@gmail.com> [aut, cre]"
+Description: More about what it does (maybe more than one line)
+License: GPL-3
+LazyData: TRUE
+Imports: 
+    Rcpp (>= 0.11.6)
+LinkingTo: 
+    Rcpp
