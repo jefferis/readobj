@@ -30,7 +30,7 @@ List loadobj(std::vector< std::string > objfile) {
 
   if (!err.empty()) {
     std::cerr << err << std::endl;
-    return false;
+    stop("failed to parse file!");
   }
 
   CharacterVector x = CharacterVector::create("foo", "bar");
