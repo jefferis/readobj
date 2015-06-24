@@ -17,7 +17,7 @@ using namespace Rcpp;
 //
 
 // [[Rcpp::export]]
-List rcpp_hello() {
+List loadob(std::vector< std::string > objfile) {
   CharacterVector x = CharacterVector::create("foo", "bar");
   NumericVector y   = NumericVector::create(0.0, 1.0);
   List z            = List::create(x, y);
