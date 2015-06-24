@@ -3,6 +3,7 @@ using namespace Rcpp;
 
 #include "tiny_obj_loader.h"
 
+// [[Rcpp::export]]
 List loadobj(std::string thefile, std::string basepath="") {
 
   std::vector<tinyobj::shape_t> shapes;
