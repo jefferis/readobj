@@ -10,7 +10,8 @@ Authors@R: c(
 Description: wraps tinyobjloader C++ wavefron obj loader
 License: GPL-3
 LazyData: TRUE
-Imports:
+Imports: 
     Rcpp (>= 0.11.6)
-LinkingTo:
+LinkingTo: 
     Rcpp
+Suggests: testthat
