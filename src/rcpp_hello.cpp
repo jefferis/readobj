@@ -33,9 +33,18 @@ List loadobj(std::vector< std::string > objfile) {
   }
 
   CharacterVector shapenames(shapes.size());
+  List z;
   for(unsigned int i=0; i<shapes.size(); i++) {
     shapenames[i]=shapes[i].name;
+    tinyobj::mesh_t m=shapes[i].mesh;
+    /* typedef struct {
+      std::vector<float> positions;
+      std::vector<float> normals;
+      std::vector<float> texcoords;
+      std::vector<unsigned int> indices;
+      std::vector<int> material_ids; // per-mesh material ID
+    } mesh_t; */
+    z[shapes[i].name]=List::create(m.positions, m.normals, m.texcoords, m.indices, m.material_ids);
   }
-  List z            = List::create(shapenames);
   return z;
 }
