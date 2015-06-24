@@ -32,6 +32,6 @@ Read a Wavefront OBJ 3D scene file into an R list
 }
 \examples{
 cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
-str(cube, max.level = 2)
+str(cube, max.level = 3)
 }
 

@@ -22,7 +22,7 @@
 #'
 #' @examples
 #' cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
-#' str(cube, max.level = 2)
+#' str(cube, max.level = 3)
 read.obj <- function(f) {
   .Call('readobj_loadobj', PACKAGE = 'readobj', f, dirname(f))
 }
