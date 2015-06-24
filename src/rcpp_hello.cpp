@@ -32,8 +32,10 @@ List loadobj(std::vector< std::string > objfile) {
     stop(err);
   }
 
-  CharacterVector x = CharacterVector::create("foo", "bar");
-  NumericVector y   = NumericVector::create(0.0, 1.0);
-  List z            = List::create(x, y);
+  CharacterVector shapenames(shapes.size());
+  for(unsigned int i=0; i<shapes.size(); i++) {
+    shapenames[i]=shapes[i].name;
+  }
+  List z            = List::create(shapenames);
   return z;
 }
