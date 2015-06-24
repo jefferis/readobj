@@ -21,7 +21,7 @@
 #' @export
 #'
 #' @examples
-#' cube=read.obj(system.file('obj/cube.obj'))
+#' cube=read.obj(system.file("obj/cube.obj", package = "tinyobjloader"))
 #' str(cube, max.level = 2)
 read.obj <- function(f) {
   .Call('tinyobjloader_loadobj', PACKAGE = 'tinyobjloader', f, dirname(f))
