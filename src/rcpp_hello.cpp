@@ -29,8 +29,7 @@ List loadobj(std::vector< std::string > objfile) {
   std::string err = tinyobj::LoadObj(shapes, materials, thefile.c_str(), NULL);
 
   if (!err.empty()) {
-    std::cerr << err << std::endl;
-    stop("failed to parse file!");
+    stop(err);
   }
 
   CharacterVector x = CharacterVector::create("foo", "bar");
