@@ -12,7 +12,7 @@ devtools::install_github("jefferis/readobj")
 library(readobj)
 
 # run examples
-example("xxx")
+example(read.obj)
 
 # get overview help for package
 ?readobj
