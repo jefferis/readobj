@@ -24,6 +24,15 @@ List loadobj(std::vector< std::string > objfile) {
   }
   std::string thefile=objfile[0];
 
+  std::vector<tinyobj::shape_t> shapes;
+  std::vector<tinyobj::material_t> materials;
+  std::string err = tinyobj::LoadObj(shapes, materials, thefile.c_str(), NULL);
+
+  if (!err.empty()) {
+    std::cerr << err << std::endl;
+    return false;
+  }
+
   CharacterVector x = CharacterVector::create("foo", "bar");
   NumericVector y   = NumericVector::create(0.0, 1.0);
   List z            = List::create(x, y);
