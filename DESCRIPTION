@@ -4,14 +4,14 @@ Title: An Rcpp based Wavefront obj loader
 Version: 0.1
 Date: 2015-06-24
 Authors@R: c(
-    person("Gregory", "Jefferis", , "jefferis@gmail.com", c("aut", "cre")),
-    person("Syoyo", "Fujita", c("aut", "cph"))
+    person("Gregory", "Jefferis", ,"jefferis@gmail.com", c("aut", "cre")),
+    person("Syoyo", "Fujita", , c("aut", "cph"))
     )
 Description: wraps tinyobjloader C++ wavefron obj loader
 License: GPL-3
 LazyData: TRUE
-Imports: 
+Imports:
     Rcpp (>= 0.11.6)
-LinkingTo: 
+LinkingTo:
     Rcpp
 Suggests: testthat
