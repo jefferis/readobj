@@ -1,4 +1,4 @@
-#' Load a Wavefront OBJ 3D scene file
+#' Read a Wavefront OBJ 3D scene file into an R list
 #'
 #' @param f The path to a file
 #'
@@ -21,8 +21,8 @@
 #' @export
 #'
 #' @examples
-#' cube=loadobj(system.file('obj/cube.obj'))
+#' cube=read.obj(system.file('obj/cube.obj'))
 #' str(cube, max.level = 2)
-loadobj <- function(f) {
+read.obj <- function(f) {
   .Call('tinyobjloader_loadobj', PACKAGE = 'tinyobjloader', f, dirname(f))
 }
