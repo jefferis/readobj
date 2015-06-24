@@ -24,5 +24,6 @@
 #' cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
 #' str(cube, max.level = 3)
 read.obj <- function(f) {
-  .Call('readobj_loadobj', PACKAGE = 'readobj', f, dirname(f))
+  # nb we need to end in a trailing fsep
+  .Call('readobj_loadobj', PACKAGE = 'readobj', f, file.path(dirname(f),""))
 }
