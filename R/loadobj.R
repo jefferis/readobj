@@ -27,6 +27,8 @@
 #' cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
 #' str(cube, max.level = 3)
 read.obj <- function(f, materialspath=NULL) {
+  if(length(f)>1)
+    stop("I only know how to read single files!")
   # check that materialspath has a trailing fsep
   if(is.null(materialspath)) {
     materialspath=dirname(f)
