@@ -1,6 +1,9 @@
 #' Read a Wavefront OBJ 3D scene file into an R list
 #'
-#' @param f The path to a file
+#' @param f Path to an OBJ file
+#' @param materialbasepath Path to a folder containing materials files. This is
+#'   optional and only required if materials files are in a different folder
+#'   from the OBJ file defined by \code{f}.
 #'
 #' @return a named list with items \code{shapes} and \code{materials}, each
 #'   containing sublists with one entry per object (shapes) or material
@@ -23,7 +26,13 @@
 #' @examples
 #' cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
 #' str(cube, max.level = 3)
-read.obj <- function(f) {
-  # nb we need to end in a trailing fsep
-  .Call('readobj_loadobj', PACKAGE = 'readobj', f, file.path(dirname(f),""))
+read.obj <- function(f, materialspath=NULL) {
+  # check that materialspath has a trailing fsep
+  if(is.null(materialspath)) {
+    materialspath=dirname(f)
+  }
+  # ensure there is a trailing fsep
+  materialspath=file.path(materialspath,"")
+
+  .Call('readobj_loadobj', PACKAGE = 'readobj', f, materialspath)
 }
