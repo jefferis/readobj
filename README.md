@@ -1,4 +1,5 @@
 # readobj
+[![Travis-CI Build Status](https://travis-ci.org/jefferis/readobj.svg?branch=master)](https://travis-ci.org/jefferis/readobj)
 ## Quick Start
 
 For the impatient ...
