@@ -29,12 +29,16 @@
 read.obj <- function(f, materialspath=NULL) {
   if(length(f)>1)
     stop("I only know how to read single files!")
-  # check that materialspath has a trailing fsep
+
+  # set default materialspath
   if(is.null(materialspath)) {
     materialspath=dirname(f)
   }
   # ensure there is a trailing fsep
-  materialspath=file.path(materialspath,"")
+  lastchar=substr(materialspath, nchar(materialspath), nchar(materialspath))
+  fsep=.Platform$file.sep
+  if(lastchar!=fsep)
+  materialspath=paste0(materialspath,fsep)
 
   .Call('readobj_loadobj', PACKAGE = 'readobj', f, materialspath)
 }
