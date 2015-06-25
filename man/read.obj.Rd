@@ -4,10 +4,14 @@
 \alias{read.obj}
 \title{Read a Wavefront OBJ 3D scene file into an R list}
 \usage{
-read.obj(f)
+read.obj(f, materialspath = NULL)
 }
 \arguments{
-\item{f}{The path to a file}
+\item{f}{Path to an OBJ file}
+
+\item{materialspath}{Path to a folder containing materials files. This is
+  optional and only required if materials files are in a different folder
+  from the OBJ file defined by \code{f}.}
 }
 \value{
 a named list with items \code{shapes} and \code{materials}, each

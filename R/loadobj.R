@@ -1,7 +1,7 @@
 #' Read a Wavefront OBJ 3D scene file into an R list
 #'
 #' @param f Path to an OBJ file
-#' @param materialbasepath Path to a folder containing materials files. This is
+#' @param materialspath Path to a folder containing materials files. This is
 #'   optional and only required if materials files are in a different folder
 #'   from the OBJ file defined by \code{f}.
 #'
