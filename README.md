@@ -38,3 +38,10 @@ devtools::install_github("jefferis/readobj")
 Note: MacOS X users will need a development environment (Xcode) to compile code.
 Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and
 [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
+
+## Acknwoledgements
+This package wraps the tinyobjloader C++ library available at 
+https://github.com/syoyo/tinyobjloader. Kudos to its author, Syoyo Fujita!
+
+tinyobjloader is released under a liberal 2 clause BSD license, which this
+package therefore inherits.
