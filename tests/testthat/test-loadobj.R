@@ -5,4 +5,6 @@ test_that("can load an obj file", {
   expect_error(read.obj("rhubarb"), "Error")
   expect_is(read.obj(system.file("obj/cube.obj", package = "readobj")),
             "list")
+  expect_warning(read.obj(system.file("obj/cube_badmtl.obj", package = "readobj")),
+                 'default material')
 })
