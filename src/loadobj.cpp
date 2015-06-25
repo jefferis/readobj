@@ -12,8 +12,17 @@ List loadobj(std::string thefile, std::string basepath="") {
                                      basepath.c_str());
 
   if (!err.empty()) {
-    stop(err);
+    std::string warnstr="WARN: ";
+    if(err.compare(0, warnstr.length(), warnstr)==0) {
+      // it's a warning
+      Function warning("warning");
+      warning(err);
+    } else {
+      // it's an error
+      stop(err);
+    }
   }
+
 #define MNAME(X) Named(#X, m.X)
   List sl, ml;
   for(unsigned int i=0; i<shapes.size(); i++) {
