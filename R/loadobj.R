@@ -4,11 +4,13 @@
 #' @param materialspath Path to a folder containing materials files. This is
 #'   optional and only required if materials files are in a different folder
 #'   from the OBJ file defined by \code{f}.
+#' @param convert.rgl Whether to convert the returned list to a
+#'   \code{rgl::shapelist3d} object containing \code{rgl::mesh3d} objects.
 #'
-#' @return a named list with items \code{shapes} and \code{materials}, each
-#'   containing sublists with one entry per object (shapes) or material
-#'   (materials). Objects in the \code{shapes} list have the following structure
-#'   \itemize{
+#' @return When \code{convert.rgl=FALSE}, the default, a named list with items
+#'   \code{shapes} and \code{materials}, each containing sublists with one entry
+#'   per object (shapes) or material (materials). Objects in the \code{shapes}
+#'   list have the following structure \itemize{
 #'
 #'   \item positions 3xN set of 3D vertices
 #'
@@ -26,7 +28,7 @@
 #' @examples
 #' cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
 #' str(cube, max.level = 3)
-read.obj <- function(f, materialspath=NULL) {
+read.obj <- function(f, materialspath=NULL, convert.rgl=FALSE) {
   if(length(f)>1)
     stop("I only know how to read single files!")
 
@@ -40,5 +42,6 @@ read.obj <- function(f, materialspath=NULL) {
   if(lastchar!=fsep)
   materialspath=paste0(materialspath,fsep)
 
-  .Call('readobj_loadobj', PACKAGE = 'readobj', f, materialspath)
+  rval=.Call('readobj_loadobj', PACKAGE = 'readobj', f, materialspath)
+  if(convert.rgl) tinyobj2shapelist3d(rval) else rval
 }

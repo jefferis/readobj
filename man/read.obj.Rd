@@ -4,20 +4,23 @@
 \alias{read.obj}
 \title{Read a Wavefront OBJ 3D scene file into an R list}
 \usage{
-read.obj(f, materialspath = NULL)
+read.obj(f, materialspath = NULL, convert.rgl = FALSE)
 }
 \arguments{
 \item{f}{Path to an OBJ file}
 
 \item{materialspath}{Path to a folder containing materials files. This is
-  optional and only required if materials files are in a different folder
-  from the OBJ file defined by \code{f}.}
+optional and only required if materials files are in a different folder
+from the OBJ file defined by \code{f}.}
+
+\item{convert.rgl}{Whether to convert the returned list to a
+  \code{rgl::shapelist3d} object containing \code{rgl::mesh3d} objects.}
 }
 \value{
-a named list with items \code{shapes} and \code{materials}, each
-  containing sublists with one entry per object (shapes) or material
-  (materials). Objects in the \code{shapes} list have the following structure
-  \itemize{
+When \code{convert.rgl=FALSE}, the default, a named list with items
+  \code{shapes} and \code{materials}, each containing sublists with one entry
+  per object (shapes) or material (materials). Objects in the \code{shapes}
+  list have the following structure \itemize{
 
   \item positions 3xN set of 3D vertices
 
