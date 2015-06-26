@@ -33,8 +33,8 @@ Not all materials settings can be processed at the moment. In
 \examples{
 cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
 if(require("rgl")){
-  cubesl=tiny2shapelist3d(cube)
-  shade3d(cube)
+  cubesl=tinyobj2shapelist3d(cube)
+  shade3d(cubesl)
 }
 }
 \seealso{

@@ -22,8 +22,8 @@
 #' @examples
 #' cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
 #' if(require("rgl")){
-#'   cubesl=tiny2shapelist3d(cube)
-#'   shade3d(cube)
+#'   cubesl=tinyobj2shapelist3d(cube)
+#'   shade3d(cubesl)
 #' }
 tinyobj2shapelist3d<-function(x) {
   if(!requireNamespace('rgl'))
