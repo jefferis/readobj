@@ -17,4 +17,6 @@ Imports:
     Rcpp (>= 0.11.6)
 LinkingTo:
     Rcpp
-Suggests: testthat
+Suggests:
+    testthat,
+    rgl
