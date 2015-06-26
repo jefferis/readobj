@@ -7,7 +7,7 @@ Authors@R: c(
     person("Gregory", "Jefferis", email = "jefferis@gmail.com",
     role = c("aut", "cph", "cre")),
     person("Syoyo", "Fujita", role=c("aut", "cph"),
-    comment="tiny_obj_loader.* are copyright Syoyo Fujiata")
+    comment="tiny_obj_loader.* are copyright Syoyo Fujita")
     )
 Description: Wraps tiny_obj_loader C++ library for reading the 'Wavefront' OBJ
     3D file format.
