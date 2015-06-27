@@ -67,7 +67,7 @@ tinyshape2mesh3d<-function(x) {
   # nb normals are expected to be 4 component in some places
   m=rgl::tmesh3d(x$positions, x$indices+1, homogeneous = F,
                normals = if(length(x$normals)) x$normals else NULL)
-  if(length(m$normals) & nrow(m$normals)==3)
+  if(length(m$normals) && nrow(m$normals)==3)
     m$normals=rbind(m$normals, 1)
   m
 }
