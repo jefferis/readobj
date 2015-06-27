@@ -41,7 +41,8 @@ tinyobj2shapelist3d<-function(x) {
   for(i in which(materialids>0)) {
     sl[[i]]$material=mats[[materialids[i]]]
   }
-  rgl::shapelist3d(sl, plot = F)
+  class(sl) <- c("shapelist3d", "shape3d")
+  sl
 }
 
 myrgb=function(x) {
