@@ -38,7 +38,7 @@ if(require("rgl")){
 }
 }
 \seealso{
-\code{\link{read.obj}}, \code{\link[rg]{mesh3d}},
-  \code{\link[rg]{shapelist3d}}, \code{\link[rg]{rgl.material}}
+\code{\link{read.obj}}, \code{\link[rgl]{mesh3d}},
+  \code{\link[rgl]{shapelist3d}}, \code{\link[rgl]{rgl.material}}
 }
 
