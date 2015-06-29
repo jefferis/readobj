@@ -1,6 +1,6 @@
 Package: readobj
 Type: Package
-Title: Fast reader for 'Wavefront' OBJ 3D scene files
+Title: Fast Reader for 'Wavefront' OBJ 3D Scene Files
 Version: 0.1
 Date: 2015-06-24
 Authors@R: c(
