@@ -24,10 +24,17 @@
 #'
 #'   \item material_ids (0-indexed, -1 when not set) }
 #' @export
-#'
+#' @seealso \code{\link{tinyobj2shapelist3d}} for details of rgl conversion
 #' @examples
 #' cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
 #' str(cube, max.level = 3)
+#'
+#' # demonstrate direct convert of result to rgl format
+#' if(require('rgl')) {
+#'   cuber=read.obj(system.file("obj/cube.obj", package = "readobj"),
+#'     convert.rgl=TRUE)
+#'   shade3d(cuber)
+#' }
 read.obj <- function(f, materialspath=NULL, convert.rgl=FALSE) {
   if(length(f)>1)
     stop("I only know how to read single files!")

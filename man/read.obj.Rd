@@ -40,5 +40,15 @@ Read a Wavefront OBJ 3D scene file into an R list
 \examples{
 cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
 str(cube, max.level = 3)
+
+# demonstrate direct convert of result to rgl format
+if(require('rgl')) {
+  cuber=read.obj(system.file("obj/cube.obj", package = "readobj"),
+    convert.rgl=TRUE)
+  shade3d(cuber)
+}
+}
+\seealso{
+\code{\link{tinyobj2shapelist3d}} for details of rgl conversion
 }
 
