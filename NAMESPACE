@@ -3,4 +3,5 @@
 export(read.obj)
 export(tinyobj2shapelist3d)
 import(Rcpp)
+importFrom(grDevices,rgb)
 useDynLib(readobj)

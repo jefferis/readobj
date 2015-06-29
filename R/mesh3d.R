@@ -45,6 +45,7 @@ tinyobj2shapelist3d<-function(x) {
   sl
 }
 
+#' @importFrom grDevices rgb
 myrgb=function(x) {
   if(any(x>1)) {
     warning("bad rgb value!")

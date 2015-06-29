@@ -14,7 +14,8 @@ Description: Wraps tiny_obj_loader C++ library for reading the 'Wavefront' OBJ
 License: BSD_2_clause + file LICENSE
 LazyData: TRUE
 Imports:
-    Rcpp (>= 0.11.6)
+    Rcpp (>= 0.11.6),
+    grDevices
 LinkingTo:
     Rcpp
 Suggests:
