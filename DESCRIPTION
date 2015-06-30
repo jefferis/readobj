@@ -9,8 +9,11 @@ Authors@R: c(
     person("Syoyo", "Fujita", role=c("aut", "cph"),
     comment="tiny_obj_loader.* are copyright Syoyo Fujita")
     )
-Description: Wraps tiny_obj_loader C++ library for reading the 'Wavefront' OBJ
-    3D file format.
+Description: Wraps 'tiny_obj_loader' C++ library for reading the 'Wavefront' OBJ
+    3D file format including both mesh objects and materials files. The
+    resultant R objects are either structured to match the 'tiny_obj_loader'
+    internal data representation or in a form directly compatible with the 'rgl'
+    package.
 License: BSD_2_clause + file LICENSE
 LazyData: TRUE
 Imports:
