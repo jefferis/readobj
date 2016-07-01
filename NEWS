@@ -1,0 +1,4 @@
+readobj 0.2
+===========
+* fix bug in reading of normals (#1)
+* expand paths before reading (#2)
