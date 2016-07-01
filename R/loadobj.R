@@ -38,7 +38,8 @@
 read.obj <- function(f, materialspath=NULL, convert.rgl=FALSE) {
   if(length(f)>1)
     stop("I only know how to read single files!")
-
+  # expand any ~ etc
+  f=path.expand(f)
   # set default materialspath
   if(is.null(materialspath)) {
     materialspath=dirname(f)
