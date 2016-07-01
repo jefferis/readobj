@@ -19,8 +19,8 @@ LazyData: TRUE
 Imports:
     Rcpp (>= 0.11.6),
     grDevices
-LinkingTo:
-    Rcpp
+LinkingTo: Rcpp
 Suggests:
     testthat,
     rgl
+RoxygenNote: 5.0.1
