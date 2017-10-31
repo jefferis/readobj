@@ -49,7 +49,6 @@ read.obj <- function(f, materialspath=NULL, convert.rgl=FALSE) {
   fsep=.Platform$file.sep
   if(lastchar!=fsep)
   materialspath=paste0(materialspath,fsep)
-
-  rval=.Call('readobj_loadobj', PACKAGE = 'readobj', f, materialspath)
+  rval=loadobj(f, materialspath)
   if(convert.rgl) tinyobj2shapelist3d(rval) else rval
 }
