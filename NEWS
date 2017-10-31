@@ -1,3 +1,7 @@
+readobj 0.3
+===========
+* fix bug in .Call since R 3.4.2 update
+
 readobj 0.2
 ===========
 * fix bug in reading of normals (#1)
