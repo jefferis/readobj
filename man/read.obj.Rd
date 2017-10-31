@@ -51,4 +51,3 @@ if(require('rgl')) {
 \seealso{
 \code{\link{tinyobj2shapelist3d}} for details of rgl conversion
 }
-

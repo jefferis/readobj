@@ -23,4 +23,3 @@ LinkingTo: Rcpp
 Suggests:
     testthat,
     rgl
-RoxygenNote: 5.0.1

@@ -41,4 +41,3 @@ if(require("rgl")){
 \code{\link{read.obj}}, \code{\link[rgl]{mesh3d}},
   \code{\link[rgl]{shapelist3d}}, \code{\link[rgl]{rgl.material}}
 }
-
