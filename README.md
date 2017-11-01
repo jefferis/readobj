@@ -5,7 +5,7 @@
 For the impatient ...
 
 ```r
-# install
+# install development version
 if (!require("devtools")) install.packages("devtools")
 devtools::install_github("jefferis/readobj")
 
@@ -26,10 +26,12 @@ test_package("readobj")
 ```
 
 ## Installation
-Currently there isn't a released version on [CRAN](http://cran.r-project.org/).
+A released version is currently in submission to [CRAN](https://cran.r-project.org/).
+Until this is available you should install the development version as described
+below.
 
 ### Development version
-You can use the [devtools](http://CRAN.R-project.org/package=devtools) package
+You can use the [devtools](https://cran.r-project.org/package=devtools) package
 to install the development version:
 
 ```r
