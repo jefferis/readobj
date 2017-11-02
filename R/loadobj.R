@@ -5,7 +5,8 @@
 #'   optional and only required if materials files are in a different folder
 #'   from the OBJ file defined by \code{f}.
 #' @param convert.rgl Whether to convert the returned list to a
-#'   \code{rgl::shapelist3d} object containing \code{rgl::mesh3d} objects.
+#'   \code{rgl::\link[rgl]{shapelist3d}} object containing
+#'   \code{rgl::\link[rgl]{mesh3d}} objects.
 #'
 #' @return When \code{convert.rgl=FALSE}, the default, a named list with items
 #'   \code{shapes} and \code{materials}, each containing sublists with one entry
@@ -23,8 +24,13 @@
 #'   0-indexed
 #'
 #'   \item material_ids (0-indexed, -1 when not set) }
+#'
+#'   When \code{convert.rgl=FALSE} a list of class shapelist3d containing a
+#'   mesh3d for each object or group element in the original OBJ file. See
+#'   \code{\link{tinyobj2shapelist3d}} for details of rgl conversion.
 #' @export
-#' @seealso \code{\link{tinyobj2shapelist3d}} for details of rgl conversion
+#' @seealso \code{\link{tinyobj2shapelist3d}}, \code{rgl::\link[rgl]{readOBJ}}
+#'   for simpler, pure R implementation.
 #' @examples
 #' cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
 #' str(cube, max.level = 3)

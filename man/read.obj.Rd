@@ -14,7 +14,8 @@ optional and only required if materials files are in a different folder
 from the OBJ file defined by \code{f}.}
 
 \item{convert.rgl}{Whether to convert the returned list to a
-\code{rgl::shapelist3d} object containing \code{rgl::mesh3d} objects.}
+\code{rgl::\link[rgl]{shapelist3d}} object containing
+\code{rgl::\link[rgl]{mesh3d}} objects.}
 }
 \value{
 When \code{convert.rgl=FALSE}, the default, a named list with items
@@ -33,6 +34,10 @@ When \code{convert.rgl=FALSE}, the default, a named list with items
   0-indexed
 
   \item material_ids (0-indexed, -1 when not set) }
+
+  When \code{convert.rgl=FALSE} a list of class shapelist3d containing a
+  mesh3d for each object or group element in the original OBJ file. See
+  \code{\link{tinyobj2shapelist3d}} for details of rgl conversion.
 }
 \description{
 Read a Wavefront OBJ 3D scene file into an R list
@@ -49,5 +54,6 @@ if(require('rgl')) {
 }
 }
 \seealso{
-\code{\link{tinyobj2shapelist3d}} for details of rgl conversion
+\code{\link{tinyobj2shapelist3d}}, \code{rgl::\link[rgl]{readOBJ}}
+  for simpler, pure R implementation.
 }
