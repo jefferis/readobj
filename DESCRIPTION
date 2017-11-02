@@ -22,4 +22,6 @@ LinkingTo: Rcpp
 Suggests:
     testthat,
     rgl
+URL: https://github.com/jefferis/readobj
+BugReports: https://github.com/jefferis/readobj/issues
 RoxygenNote: 6.0.1
