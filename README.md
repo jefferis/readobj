@@ -1,13 +1,14 @@
 # readobj
 [![Travis-CI Build Status](https://travis-ci.org/jefferis/readobj.svg?branch=master)](https://travis-ci.org/jefferis/readobj)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/readobj)](https://cran.r-project.org/package=readobj)
+
 ## Quick Start
 
 For the impatient ...
 
 ```r
-# install development version
-if (!require("devtools")) install.packages("devtools")
-devtools::install_github("jefferis/readobj")
+# install CRAN version
+install.packages("readobj")
 
 # use
 library(readobj)
@@ -26,9 +27,11 @@ test_package("readobj")
 ```
 
 ## Installation
-A released version is currently in submission to [CRAN](https://cran.r-project.org/).
-Until this is available you should install the development version as described
-below.
+A released version is now available on [CRAN](https://cran.r-project.org/).
+
+```r
+install.packages("readobj")
+```
 
 ### Development version
 You can use the [devtools](https://cran.r-project.org/package=devtools) package
