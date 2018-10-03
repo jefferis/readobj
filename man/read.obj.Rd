@@ -42,13 +42,20 @@ When \code{convert.rgl=FALSE}, the default, a named list with items
 \description{
 Read a Wavefront OBJ 3D scene file into an R list
 }
+\section{Sample files}{
+ Note that at the request of the CRAN maintainers the
+  sample files have the file extension \code{.wavefront} instead of the
+  standard \code{.obj} because this triggers a false positive R CMD check
+  NOTE.
+}
+
 \examples{
-cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
+cube=read.obj(system.file("obj/cube.wavefront", package = "readobj"))
 str(cube, max.level = 3)
 
 # demonstrate direct convert of result to rgl format
 if(require('rgl')) {
-  cuber=read.obj(system.file("obj/cube.obj", package = "readobj"),
+  cuber=read.obj(system.file("obj/cube.wavefront", package = "readobj"),
     convert.rgl=TRUE)
   shade3d(cuber)
 }

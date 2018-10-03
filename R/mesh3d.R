@@ -20,7 +20,7 @@
 #' @seealso \code{\link{read.obj}}, \code{\link[rgl]{mesh3d}},
 #'   \code{\link[rgl]{shapelist3d}}, \code{\link[rgl]{rgl.material}}
 #' @examples
-#' cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
+#' cube=read.obj(system.file("obj/cube.wavefront", package = "readobj"))
 #' if(require("rgl")){
 #'   cubesl=tinyobj2shapelist3d(cube)
 #'   shade3d(cubesl)
