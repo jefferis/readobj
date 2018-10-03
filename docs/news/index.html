@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Authors • readobj</title>
+<title>Changelog • readobj</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,12 +25,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Authors" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -46,7 +46,7 @@
   </head>
 
   <body>
-    <div class="container template-authors">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -57,7 +57,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">readobj</a>
+        <a class="navbar-link" href="../index.html">readobj</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.1</span>
       </span>
     </div>
@@ -65,16 +65,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -95,26 +95,53 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Authors</h1>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/jefferis/readobj/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <ul class="list-unstyled">
-      <li>
-        <p><strong>Gregory Jefferis</strong>. Author, copyright holder, maintainer. 
-        </p>
-      </li>
-      <li>
-        <p><strong>Syoyo Fujita</strong>. Author, copyright holder. 
-        <br /><small>tiny_obj_loader.* are copyright Syoyo Fujita</small></p>
-      </li>
-    </ul>
+    <div id="readobj-0-3-1" class="section level1">
+<h1 class="page-header">
+<a href="#readobj-0-3-1" class="anchor"></a>readobj 0.3.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Rename .obj sample files to .wavefront at request of CRAN maintainers to avoid false positive object file R CMD check NOTE.</li>
+</ul>
+</div>
+    <div id="readobj-0-3" class="section level1">
+<h1 class="page-header">
+<a href="#readobj-0-3" class="anchor"></a>readobj 0.3<small> 2017-11-02 </small>
+</h1>
+<ul>
+<li>fix bug in .Call since RCpp update</li>
+<li>documentation improvements</li>
+<li>URL fixes preparing for CRAN</li>
+</ul>
+</div>
+    <div id="readobj-0-2" class="section level1">
+<h1 class="page-header">
+<a href="#readobj-0-2" class="anchor"></a>readobj 0.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>fix bug in reading of normals (<a href='https://github.com/jefferis/readobj/issues/1'>#1</a>)</li>
+<li>expand paths before reading (<a href='https://github.com/jefferis/readobj/issues/2'>#2</a>)</li>
+</ul>
+</div>
+  </div>
 
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#readobj-0-3-1">0.3.1</a></li>
+        <li><a href="#readobj-0-3">0.3</a></li>
+        <li><a href="#readobj-0-2">0.2</a></li>
+      </ul>
+    </div>
   </div>
 
 </div>
-
 
       <footer>
       <div class="copyright">

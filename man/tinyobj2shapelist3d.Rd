@@ -31,7 +31,7 @@ Not all materials settings can be processed at the moment. In
   }
 }
 \examples{
-cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
+cube=read.obj(system.file("obj/cube.wavefront", package = "readobj"))
 if(require("rgl")){
   cubesl=tinyobj2shapelist3d(cube)
   shade3d(cubesl)

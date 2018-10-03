@@ -7,7 +7,10 @@
 #' @param convert.rgl Whether to convert the returned list to a
 #'   \code{rgl::\link[rgl]{shapelist3d}} object containing
 #'   \code{rgl::\link[rgl]{mesh3d}} objects.
-#'
+#' @section Sample files: Note that at the request of the CRAN maintainers the
+#'   sample files have the file extension \code{.wavefront} instead of the
+#'   standard \code{.obj} because this triggers a false positive R CMD check
+#'   NOTE.
 #' @return When \code{convert.rgl=FALSE}, the default, a named list with items
 #'   \code{shapes} and \code{materials}, each containing sublists with one entry
 #'   per object (shapes) or material (materials). Objects in the \code{shapes}
@@ -32,12 +35,12 @@
 #' @seealso \code{\link{tinyobj2shapelist3d}}, \code{rgl::\link[rgl]{readOBJ}}
 #'   for simpler, pure R implementation.
 #' @examples
-#' cube=read.obj(system.file("obj/cube.obj", package = "readobj"))
+#' cube=read.obj(system.file("obj/cube.wavefront", package = "readobj"))
 #' str(cube, max.level = 3)
 #'
-#' # demonstrate direct convert of result to rgl format
+#' # demonstrate direct conversion of result to rgl format
 #' if(require('rgl')) {
-#'   cuber=read.obj(system.file("obj/cube.obj", package = "readobj"),
+#'   cuber=read.obj(system.file("obj/cube.wavefront", package = "readobj"),
 #'     convert.rgl=TRUE)
 #'   shade3d(cuber)
 #' }
