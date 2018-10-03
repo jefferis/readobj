@@ -1,7 +1,7 @@
 Package: readobj
 Type: Package
 Title: Fast Reader for 'Wavefront' OBJ 3D Scene Files
-Version: 0.3
+Version: 0.3.1
 Authors@R: c(
     person("Gregory", "Jefferis", email = "jefferis@gmail.com",
     role = c("aut", "cph", "cre")),
