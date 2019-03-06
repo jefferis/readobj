@@ -18,6 +18,12 @@ test_that("can convert to rgl format", {
     cube=readRDS("testdata/cube.rds")
     cubesl_baseline=readRDS("testdata/cubesl.rds")
     expect_is(cubesl <- tinyobj2shapelist3d(cube), 'shapelist3d')
+    # rgl dropped the "primitivetype" component in version 0.100.x
+    # Ignore it in the tests so we work with both old and new rgl
+    for (side in c("front", "back", "right", "left", "top", "bottom")) {
+      cubesl[[side]]$primitivetype <-
+        cubesl_baseline[[side]]$primitivetype <- NULL
+    }
     expect_equal(cubesl, cubesl_baseline)
   }
 })
