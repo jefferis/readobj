@@ -1,9 +1,12 @@
-## Test environments
-* local OS X install, R 3.5.1
-* Ubuntu 14.04.5 LTS (on travis-ci), R 3.5.1
-* win-builder (unstable) (2018-10-03 r75387)
+## Remarks
 
-https://win-builder.r-project.org/7z9k0S22RL1P/
+* fixes a test error introduced by a change in object structure for latest
+  version of rgl (thanks to Duncan Murdoch for the fix, #3)
+
+## Test environments
+* local OS X install, R 3.5.2
+* travis-ci
+* win-builder (unstable) (2019-03-09 r76216)
 
 ## R CMD check results
 
