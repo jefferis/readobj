@@ -34,6 +34,8 @@ test_that("can convert to rgl format", {
 
     tile=readRDS("testdata/tile.rds")
     expect_is(tilesl <- tinyobj2shapelist3d(tile), 'shapelist3d')
+    # texture=system.file("obj/tile.png", package="readobj")
+    # shade3d(tilesl, material=list(texture=texture, color="white"))
     # saveRDS(tilesl, file='testdata/tilesl.rds')
     tilesl_baseline=readRDS("testdata/tilesl.rds")
     for (side in c("front", "back", "right", "left", "top", "bottom")) {
@@ -41,25 +43,5 @@ test_that("can convert to rgl format", {
         tilesl_baseline[[side]]$primitivetype <- NULL
     }
     expect_equal(tilesl, tilesl_baseline)
-  }
-})
-
-test_that("texture rendered correctly", {
-  skip_on_cran() # not sure how consistent rgl.snapshot() will be cross-platform
-  if(require('rgl', quietly = TRUE) && require('magick', quietly = TRUE)){
-      open3d()
-      view3d(phi=-45)
-      tilesl=readRDS("testdata/tilesl.rds")
-      texture=system.file("obj/tile.png", package="readobj")
-      shade3d(tilesl, material=list(texture=texture, color="white"))
-      # rgl.snapshot("testdata/snapshot.png")
-      snapshot <- tempfile(fileext=".png")
-      rgl.snapshot(snapshot)
-      rgl.close()
-
-      control=image_read("testdata/snapshot.png")
-      test=image_read(snapshot)
-      diff=image_compare(control, test, "AE")
-      expect_true(attr(diff, "distortion") < 0.01)
   }
 })

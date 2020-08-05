@@ -21,7 +21,6 @@ Imports:
     grDevices
 LinkingTo: Rcpp
 Suggests:
-    magick,
     testthat,
     rgl
 URL: https://github.com/jefferis/readobj
