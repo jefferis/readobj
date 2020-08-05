@@ -35,7 +35,7 @@ When \code{convert.rgl=FALSE}, the default, a named list with items
 
   \item material_ids (0-indexed, -1 when not set) }
 
-  When \code{convert.rgl=FALSE} a list of class shapelist3d containing a
+  When \code{convert.rgl=TRUE} a list of class shapelist3d containing a
   mesh3d for each object or group element in the original OBJ file. See
   \code{\link{tinyobj2shapelist3d}} for details of rgl conversion.
 }
