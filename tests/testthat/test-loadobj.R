@@ -11,6 +11,12 @@ test_that("can load an obj file", {
   # saveRDS(cube, file='tests/testthat/testdata/cube.rds')
   cube_baseline=readRDS("testdata/cube.rds")
   expect_equal(cube, cube_baseline)
+
+  expect_is(tile<-read.obj(system.file("obj/tile.wavefront", package = "readobj")),
+            "list")
+  # saveRDS(tile, file='testdata/tile.rds')
+  tile_baseline=readRDS("testdata/tile.rds")
+  expect_equal(tile, tile_baseline)
 })
 
 test_that("can convert to rgl format", {
@@ -25,5 +31,17 @@ test_that("can convert to rgl format", {
         cubesl_baseline[[side]]$primitivetype <- NULL
     }
     expect_equal(cubesl, cubesl_baseline)
+
+    tile=readRDS("testdata/tile.rds")
+    expect_is(tilesl <- tinyobj2shapelist3d(tile), 'shapelist3d')
+    # texture=system.file("obj/tile.png", package="readobj")
+    # shade3d(tilesl, material=list(texture=texture, color="white"))
+    # saveRDS(tilesl, file='testdata/tilesl.rds')
+    tilesl_baseline=readRDS("testdata/tilesl.rds")
+    for (side in c("front", "back", "right", "left", "top", "bottom")) {
+      tilesl[[side]]$primitivetype <-
+        tilesl_baseline[[side]]$primitivetype <- NULL
+    }
+    expect_equal(tilesl, tilesl_baseline)
   }
 })
