@@ -36,12 +36,12 @@ install.packages("readobj")
 ```
 
 ### Development version
-You can use the [devtools](https://cran.r-project.org/package=devtools) package
+You can use the [remotes](https://cran.r-project.org/package=remotes) package
 to install the development version:
 
 ```r
-if (!require("devtools")) install.packages("devtools")
-devtools::install_github("jefferis/readobj")
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("jefferis/readobj")
 ```
 
 Note: MacOS X users will need a development environment 
