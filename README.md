@@ -1,7 +1,9 @@
 # readobj
+<!-- badges: start -->
 [![Travis-CI Build Status](https://travis-ci.org/jefferis/readobj.svg?branch=master)](https://travis-ci.org/jefferis/readobj)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/readobj)](https://cran.r-project.org/package=readobj)
-
+[![Downloads](http://cranlogs.r-pkg.org/badges/readobj?color=brightgreen)](http://www.r-pkg.org/pkg/readobj)
+<!-- badges: end -->
 ## Quick Start
 
 For the impatient ...
