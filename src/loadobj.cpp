@@ -8,10 +8,12 @@ List loadobj(std::string thefile, std::string basepath="") {
 
   std::vector<tinyobj::shape_t> shapes;
   std::vector<tinyobj::material_t> materials;
-  std::string err = tinyobj::LoadObj(shapes, materials, thefile.c_str(),
-                                     basepath.c_str());
+  tinyobj::attrib_t attrib;
+  std::string warn, err;
+  bool ok = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err,
+                              thefile.c_str(), basepath.c_str());
 
-  if (!err.empty()) {
+  if (!ok) {
     std::string warnstr="WARN: ";
     if(err.compare(0, warnstr.length(), warnstr)==0) {
       // it's a warning
@@ -34,11 +36,11 @@ List loadobj(std::string thefile, std::string basepath="") {
       std::vector<unsigned int> indices;
       std::vector<int> material_ids; // per-mesh material ID
     } mesh_t; */
-    if((m.positions.size() % 3) !=0) {
+    if((positions.size() % 3) !=0) {
       stop ("Number of vertices is not a multiple of 3 for object", i);
     }
-    const size_t nv = m.positions.size() / 3L;
-    const size_t nn = m.normals.size() / 3L;
+    const size_t nv = positions.size() / 3L;
+    const size_t nn = normals.size() / 3L;
 
     const size_t nfaces=m.material_ids.size();
     // number of vertices per face
@@ -48,9 +50,9 @@ List loadobj(std::string thefile, std::string basepath="") {
       stop("Number of vertices / mesh face is not constant in object", i);
     }
     List sli;
-    sli["positions"]=NumericMatrix(3L, nv, m.positions.begin());
-    sli["normals"]=NumericMatrix(3L, nn, m.normals.begin());
-    sli["texcoords"]=m.texcoords;
+    sli["positions"]=NumericMatrix(3L, nv, positions.begin());
+    sli["normals"]=NumericMatrix(3L, nn, normals.begin());
+    sli["texcoords"]=texcoords;
     sli["indices"]=NumericMatrix(nv_face, nfaces, m.indices.begin());
     sli["material_ids"]=m.material_ids;
     sl[shapes[i].name]=sli;
