@@ -4,6 +4,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/readobj)](https://cran.r-project.org/package=readobj)
 [![Downloads](http://cranlogs.r-pkg.org/badges/readobj?color=brightgreen)](http://www.r-pkg.org/pkg/readobj)
 <!-- badges: end -->
+
 ## Quick Start
 
 For the impatient ...
@@ -29,7 +30,7 @@ test_package("readobj")
 ```
 
 ## Installation
-A released version is now available on [CRAN](https://cran.r-project.org/).
+A released version is now available on [CRAN](https://cran.r-project.org/package=readobj).
 
 ```r
 install.packages("readobj")
@@ -44,9 +45,8 @@ if (!require("remotes")) install.packages("remotes")
 remotes::install_github("jefferis/readobj")
 ```
 
-Note: MacOS X users will need a development environment 
-([Xcode](https://developer.apple.com/xcode/resources/)) to compile code.
-Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) to install this way.
+Note: You will need a development environment able to compile code C++ to 
+install in this way. MacOS X users will likely need Xcode (see https://cran.r-project.org/). Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) to install this way.
 
 ## Acknwoledgements
 This package wraps the tinyobjloader C++ library available at 
