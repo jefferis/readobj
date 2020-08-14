@@ -30,30 +30,45 @@ List loadobj(std::string thefile, std::string basepath="") {
   for(unsigned int i=0; i<shapes.size(); i++) {
     tinyobj::mesh_t m=shapes[i].mesh;
     /* typedef struct {
-      std::vector<float> positions;
-      std::vector<float> normals;
-      std::vector<float> texcoords;
-      std::vector<unsigned int> indices;
-      std::vector<int> material_ids; // per-mesh material ID
-    } mesh_t; */
-    if((positions.size() % 3) !=0) {
-      stop ("Number of vertices is not a multiple of 3 for object", i);
-    }
-    const size_t nv = positions.size() / 3L;
-    const size_t nn = normals.size() / 3L;
+     std::vector<index_t> indices;
+     std::vector<unsigned char> num_face_vertices;  // The number of vertices per
+     // face. 3 = polygon, 4 = quad,
+     // ... Up to 255.
+     std::vector<int> material_ids;                 // per-face material ID
+     std::vector<unsigned int> smoothing_group_ids;  // per-face smoothing group
+     // ID(0 = off. positive value
+     // = group id)
+     std::vector<tag_t> tags;                        // SubD tag
+    } mesh_t;*/
 
-    const size_t nfaces=m.material_ids.size();
+    const size_t nv = attrib.vertices.size() / 3L;
+    const size_t nn = attrib.normals.size() / 3L;
+
+    const size_t nfaces=m.num_face_vertices.size();
     // number of vertices per face
     const size_t nv_face=m.indices.size()/nfaces;
 
-    if((m.indices.size() % nv_face) != 0) {
-      stop("Number of vertices / mesh face is not constant in object", i);
+    IntegerMatrix indices(nv_face, nfaces);
+
+    size_t index_offset = 0;
+    for (size_t f = 0; f < m.num_face_vertices.size(); f++) {
+      const int fv = m.num_face_vertices[f];
+      if(fv!=3L) {
+        stop("I only accept objects with triangular faces!");
+      }
+      for (size_t v = 0; v < fv; v++) {
+        // access to vertex
+        tinyobj::index_t idx = m.indices[index_offset + v];
+        indices(v, f) = idx.vertex_index;
+      }
+      index_offset += fv;
     }
+
     List sli;
-    sli["positions"]=NumericMatrix(3L, nv, positions.begin());
-    sli["normals"]=NumericMatrix(3L, nn, normals.begin());
-    sli["texcoords"]=texcoords;
-    sli["indices"]=NumericMatrix(nv_face, nfaces, m.indices.begin());
+    sli["positions"]=NumericMatrix(3L, nv, attrib.vertices.begin());
+    sli["normals"]=NumericMatrix(3L, nn, attrib.normals.begin());
+    sli["texcoords"]=attrib.texcoords;
+    sli["indices"]=indices;
     sli["material_ids"]=m.material_ids;
     sl[shapes[i].name]=sli;
   }
