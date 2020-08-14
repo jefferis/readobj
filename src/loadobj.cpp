@@ -49,6 +49,7 @@ List loadobj(std::string thefile, std::string basepath="") {
     const size_t nv_face=m.indices.size()/nfaces;
 
     IntegerMatrix indices(nv_face, nfaces);
+    IntegerMatrix texindices(nv_face, nfaces);
 
     size_t index_offset = 0;
     for (size_t f = 0; f < m.num_face_vertices.size(); f++) {
@@ -60,6 +61,7 @@ List loadobj(std::string thefile, std::string basepath="") {
         // access to vertex
         tinyobj::index_t idx = m.indices[index_offset + v];
         indices(v, f) = idx.vertex_index;
+        texindices(v, f) = idx.texcoord_index;
       }
       index_offset += fv;
     }
@@ -69,6 +71,7 @@ List loadobj(std::string thefile, std::string basepath="") {
     sli["normals"]=NumericMatrix(3L, nn, attrib.normals.begin());
     sli["texcoords"]=attrib.texcoords;
     sli["indices"]=indices;
+    sli["texindices"]=texindices;
     sli["material_ids"]=m.material_ids;
     sl[shapes[i].name]=sli;
   }
