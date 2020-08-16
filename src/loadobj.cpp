@@ -43,6 +43,7 @@ List loadobj(std::string thefile, std::string basepath="") {
 
     const size_t nv = attrib.vertices.size() / 3L;
     const size_t nn = attrib.normals.size() / 3L;
+    const size_t nt = attrib.texcoords.size() / 2L;
 
     const size_t nfaces=m.num_face_vertices.size();
     // number of vertices per face
@@ -69,7 +70,7 @@ List loadobj(std::string thefile, std::string basepath="") {
     List sli;
     sli["positions"]=NumericMatrix(3L, nv, attrib.vertices.begin());
     sli["normals"]=NumericMatrix(3L, nn, attrib.normals.begin());
-    sli["texcoords"]=attrib.texcoords;
+    sli["texcoords"]=NumericMatrix(2L, nt, attrib.texcoords.begin());
     sli["indices"]=indices;
     sli["texindices"]=texindices;
     sli["material_ids"]=m.material_ids;
