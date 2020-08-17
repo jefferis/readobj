@@ -14,14 +14,12 @@ List loadobj(std::string thefile, std::string basepath="", bool triangulate=true
                               thefile.c_str(), basepath.c_str(), triangulate);
 
   if (!ok) {
-    std::string warnstr="WARN: ";
-    if(err.compare(0, warnstr.length(), warnstr)==0) {
-      // it's a warning
+    stop(err);
+  } else {
+    // check for any warnings
+    if(warn.length()>0) {
       Function warning("warning");
-      warning(err);
-    } else {
-      // it's an error
-      stop(err);
+      warning(warn);
     }
   }
 
