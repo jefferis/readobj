@@ -7,6 +7,9 @@
 #' @param convert.rgl Whether to convert the returned list to a
 #'   \code{rgl::\link[rgl]{shapelist3d}} object containing
 #'   \code{rgl::\link[rgl]{mesh3d}} objects.
+#' @param triangulate (default \code{TRUE}) Whether to convert all mesh faces to
+#'   triangles. Note that only meshes with triangular or quad faces are
+#'   supported.
 #' @section Sample files: Note that at the request of the CRAN maintainers the
 #'   sample files have the file extension \code{.wavefront} instead of the
 #'   standard \code{.obj} because this triggers a false positive R CMD check
@@ -44,7 +47,7 @@
 #'     convert.rgl=TRUE)
 #'   shade3d(cuber)
 #' }
-read.obj <- function(f, materialspath=NULL, convert.rgl=FALSE) {
+read.obj <- function(f, materialspath=NULL, convert.rgl=FALSE, triangulate=TRUE) {
   if(length(f)>1)
     stop("I only know how to read single files!")
   # expand any ~ etc
@@ -58,6 +61,6 @@ read.obj <- function(f, materialspath=NULL, convert.rgl=FALSE) {
   fsep=.Platform$file.sep
   if(lastchar!=fsep)
   materialspath=paste0(materialspath,fsep)
-  rval=loadobj(f, materialspath)
+  rval=loadobj(f, materialspath, triangulate=triangulate)
   if(convert.rgl) tinyobj2shapelist3d(rval) else rval
 }
