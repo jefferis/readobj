@@ -19,6 +19,13 @@ test_that("can load an obj file", {
   expect_equal(tile, tile_baseline)
 })
 
+test_that("can load file with mix of quads and triangles", {
+  expect_is(mixed<-read.obj(system.file("obj/mixed.wavefront", package = "readobj"), triangulate = FALSE),
+            "list")
+  expect_named(mixed$shapes[[1]], c("positions", "indices", "nvfaces","material_ids"))
+  expect_equal(as.integer(mixed$shapes[[1]]$nvfaces), rep(4:3,c(6,4)))
+})
+
 test_that("can convert to rgl format", {
   if(require('rgl', quietly = TRUE)){
     cube=readRDS("testdata/cube.rds")
