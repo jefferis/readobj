@@ -69,7 +69,7 @@ tinyshape2mesh3d<-function(x) {
   indices=x$indices+1
   normals=if(length(x$normals)) t(x$normals) else NULL
   if(length(x$texcoords))
-      texcoords=matrix(x$texcoords, ncol=2, byrow=TRUE)
+      texcoords=x$texcoords
   else
       texcoords=NULL
   m=rgl::tmesh3d(vertices, indices, homogeneous = FALSE,
