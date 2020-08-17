@@ -6,20 +6,21 @@
 using namespace Rcpp;
 
 // loadobj
-List loadobj(std::string thefile, std::string basepath);
-RcppExport SEXP _readobj_loadobj(SEXP thefileSEXP, SEXP basepathSEXP) {
+List loadobj(std::string thefile, std::string basepath, bool triangulate);
+RcppExport SEXP _readobj_loadobj(SEXP thefileSEXP, SEXP basepathSEXP, SEXP triangulateSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type thefile(thefileSEXP);
     Rcpp::traits::input_parameter< std::string >::type basepath(basepathSEXP);
-    rcpp_result_gen = Rcpp::wrap(loadobj(thefile, basepath));
+    Rcpp::traits::input_parameter< bool >::type triangulate(triangulateSEXP);
+    rcpp_result_gen = Rcpp::wrap(loadobj(thefile, basepath, triangulate));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_readobj_loadobj", (DL_FUNC) &_readobj_loadobj, 2},
+    {"_readobj_loadobj", (DL_FUNC) &_readobj_loadobj, 3},
     {NULL, NULL, 0}
 };
 

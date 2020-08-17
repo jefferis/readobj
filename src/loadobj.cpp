@@ -4,14 +4,14 @@ using namespace Rcpp;
 #include "tiny_obj_loader.h"
 
 // [[Rcpp::export]]
-List loadobj(std::string thefile, std::string basepath="") {
+List loadobj(std::string thefile, std::string basepath="", bool triangulate=true) {
 
   std::vector<tinyobj::shape_t> shapes;
   std::vector<tinyobj::material_t> materials;
   tinyobj::attrib_t attrib;
   std::string warn, err;
   bool ok = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err,
-                              thefile.c_str(), basepath.c_str());
+                              thefile.c_str(), basepath.c_str(), triangulate);
 
   if (!ok) {
     std::string warnstr="WARN: ";
@@ -46,33 +46,46 @@ List loadobj(std::string thefile, std::string basepath="") {
     const size_t nt = attrib.texcoords.size() / 2L;
 
     const size_t nfaces=m.num_face_vertices.size();
-    // number of vertices per face
-    const size_t nv_face=m.indices.size()/nfaces;
 
-    IntegerMatrix indices(nv_face, nfaces);
-    IntegerMatrix texindices(nv_face, nfaces);
+    const size_t maxfaces=*std::max_element(m.num_face_vertices.begin(), m.num_face_vertices.end());
+    const size_t minfaces=*std::min_element(m.num_face_vertices.begin(), m.num_face_vertices.end());
+    const bool mixedfaces = maxfaces!=minfaces;
+    const bool havetex = attrib.texcoords.size()>0;
+
+    if(maxfaces>4 || minfaces<3) {
+      stop("I only accept objects with triangular or quad faces!");
+    }
+
+    IntegerMatrix indices(maxfaces, nfaces);
+    IntegerMatrix texindices(maxfaces, havetex?nfaces:0L);
 
     size_t index_offset = 0;
     for (size_t f = 0; f < m.num_face_vertices.size(); f++) {
       const int fv = m.num_face_vertices[f];
-      if(fv!=3L) {
-        stop("I only accept objects with triangular faces!");
-      }
       for (size_t v = 0; v < fv; v++) {
         // access to vertex
         tinyobj::index_t idx = m.indices[index_offset + v];
         indices(v, f) = idx.vertex_index;
-        texindices(v, f) = idx.texcoord_index;
+        if(havetex) {
+          texindices(v, f) = idx.texcoord_index;
+        }
       }
       index_offset += fv;
     }
 
     List sli;
     sli["positions"]=NumericMatrix(3L, nv, attrib.vertices.begin());
-    sli["normals"]=NumericMatrix(3L, nn, attrib.normals.begin());
-    sli["texcoords"]=NumericMatrix(2L, nt, attrib.texcoords.begin());
     sli["indices"]=indices;
-    sli["texindices"]=texindices;
+    if(attrib.normals.size()>0) {
+      sli["normals"]=NumericMatrix(3L, nn, attrib.normals.begin());
+    }
+    if(havetex) {
+      sli["texcoords"]=NumericMatrix(2L, nt, attrib.texcoords.begin());
+      sli["texindices"]=texindices;
+    }
+    if(mixedfaces) {
+      sli["nvfaces"]=m.num_face_vertices;
+    }
     sli["material_ids"]=m.material_ids;
     sl[shapes[i].name]=sli;
   }
