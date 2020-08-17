@@ -4,7 +4,7 @@
 \alias{read.obj}
 \title{Read a Wavefront OBJ 3D scene file into an R list}
 \usage{
-read.obj(f, materialspath = NULL, convert.rgl = FALSE)
+read.obj(f, materialspath = NULL, convert.rgl = FALSE, triangulate = TRUE)
 }
 \arguments{
 \item{f}{Path to an OBJ file}
@@ -16,6 +16,10 @@ from the OBJ file defined by \code{f}.}
 \item{convert.rgl}{Whether to convert the returned list to a
 \code{rgl::\link[rgl]{shapelist3d}} object containing
 \code{rgl::\link[rgl]{mesh3d}} objects.}
+
+\item{triangulate}{(default \code{TRUE}) Whether to convert all mesh faces to
+triangles. Note that only meshes with triangular or quad faces are
+supported.}
 }
 \value{
 When \code{convert.rgl=FALSE}, the default, a named list with items
