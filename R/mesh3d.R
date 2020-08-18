@@ -67,11 +67,36 @@ tinymaterial2rgl<-function(x){
 tinyshape2mesh3d<-function(x) {
   vertices=x$positions
   indices=x$indices+1
-  normals=if(length(x$normals)) t(x$normals) else NULL
-  if(length(x$texcoords))
+  if(length(x$texcoords)) {
       texcoords=x$texcoords
-  else
+      texindices=ifelse(x$texindices == -1, NA_integer_, x$texindices+1)
+
+      # for each mesh vertex in (tex)indices find associated position and tex coordinate
+      dft=expand.grid(r=seq_len(nrow(indices)), c=seq_len(ncol(indices)))
+      for(i in seq_len(nrow(dft))) {
+          dft$position[i]=indices[dft$r[i], dft$c[i]]
+          dft$texcoord[i]=texindices[dft$r[i], dft$c[i]]
+      }
+      # find our new duplicated vertices/texcoords indices
+      dfi=unique(dft[, 3:4])
+      dfi$id=seq_len(nrow(dfi))
+      dft=merge(dft, dfi, sort=FALSE)
+
+      # update vectices, texcoords, and indices with new duplicated indices
+      for(i in seq_len(nrow(dft))) {
+          indices[dft$r[i], dft$c[i]]=dft$id[i]
+      }
+      vertices=vertices[, dfi[, 1]]
+      # rgl::tmesh3d expects the transpose of texcoords but not vertices
+      texcoords=t(texcoords[, dfi[, 2]])
+      # don't know if 'normals' line below works
+      # this assumes 'normals' of positive length is a matrix of same dimension as 'positions'
+      # and it needs to be transposed before being passed to rgl::tmesh3d
+      normals=if(length(x$normals)) normals <- t(x$normals[, dfi[, 1]]) else NULL
+  } else {
+      normals=if(length(x$normals)) normals <- t(x$normals) else NULL
       texcoords=NULL
+  }
   m=rgl::tmesh3d(vertices, indices, homogeneous = FALSE,
                  normals = normals, texcoords = texcoords)
   # nb normals are expected to be 4 component in some places
