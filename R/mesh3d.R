@@ -73,22 +73,19 @@ tinyshape2mesh3d<-function(x) {
 
       # for each mesh vertex in (tex)indices find associated position and tex coordinate
       dft=expand.grid(r=seq_len(nrow(indices)), c=seq_len(ncol(indices)))
-      for(i in seq_len(nrow(dft))) {
-          dft$position[i]=indices[dft$r[i], dft$c[i]]
-          dft$texcoord[i]=texindices[dft$r[i], dft$c[i]]
-      }
+      dft$position=c(indices)
+      dft$texcoord=c(texindices)
       # find our new duplicated vertices/texcoords indices
       dfi=unique(dft[, 3:4])
       dfi$id=seq_len(nrow(dfi))
       dft=merge(dft, dfi, sort=FALSE)
+      dft=dft[order(dft$c, dft$r),]
 
       # update vectices, texcoords, and indices with new duplicated indices
-      for(i in seq_len(nrow(dft))) {
-          indices[dft$r[i], dft$c[i]]=dft$id[i]
-      }
       vertices=vertices[, dfi[, 1]]
       # rgl::tmesh3d expects the transpose of texcoords but not vertices
       texcoords=t(texcoords[, dfi[, 2]])
+      indices[,]=dft$id
       # don't know if 'normals' line below works
       # this assumes 'normals' of positive length is a matrix of same dimension as 'positions'
       # and it needs to be transposed before being passed to rgl::tmesh3d
