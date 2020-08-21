@@ -14,20 +14,42 @@
 #'   sample files have the file extension \code{.wavefront} instead of the
 #'   standard \code{.obj} because this triggers a false positive R CMD check
 #'   NOTE.
+#' @details \code{tinyobjloader} made some substantial changes to its data
+#'   structures after the first code snapshot was taken for the this package in
+#'   2015. In order to benefit from bug fixes, we have updated the coded in
+#'   2020, but we note that \code{tinyobjloader} now de-duplicates vertices more
+#'   aggressively e.g. in the situation where there are texture coordinates.
+#'
+#'   Note that some fields in the \code{tinyobjloader} return structure will be
+#'   omitted when they are not relevant for a given obj file. In this case, as
+#'   with any R list, the list element will have the value \code{NULL} when
+#'   tested. See examples.
 #' @return When \code{convert.rgl=FALSE}, the default, a named list with items
 #'   \code{shapes} and \code{materials}, each containing sublists with one entry
 #'   per object (shapes) or material (materials). Objects in the \code{shapes}
 #'   list have the following structure \itemize{
 #'
-#'   \item positions 3xN set of 3D vertices
+#'   \item positions 3xN matrix of 3D vertices
 #'
-#'   \item normals 3xN set of normal directions for each vertex (has 3 rows and
-#'   0 cols when normals are not available)
-#'
-#'   \item texcoords vector containing unprocessed texture coordinates
-#'
-#'   \item indices 3/4xM set of indices into vertex array (trimesh/quadmesh)
+#'   \item indices 3/4xM matrix of indices into vertex array (trimesh/quadmesh)
 #'   0-indexed
+#'
+#'   \item normals 3xN matrix of normal directions for each vertex (missing when
+#'   there are no normals)
+#'
+#'   \item normindices 3/4xM matrix of indices into normals array
+#'   (trimesh/quadmesh) 0-indexed (missing when there are no normals)
+#'
+#'   \item texcoords 2xN matrix of texture coordinates (missing when there are
+#'   no texture coordinates)
+#'
+#'   \item texindices 3/4xM matrix of indices into texcoords array
+#'   (trimesh/quadmesh) 0-indexed (missing when there are no texture
+#'   coordinates)
+#'
+#'   \item nvfaces Raw vector specifying the number of vertices per face (only
+#'   present when triangulate=TRUE and there are a mixture of different numbers
+#'   of vertices per face.)
 #'
 #'   \item material_ids (0-indexed, -1 when not set) }
 #'
@@ -39,7 +61,9 @@
 #'   for simpler, pure R implementation.
 #' @examples
 #' cube=read.obj(system.file("obj/cube.wavefront", package = "readobj"))
-#' str(cube, max.level = 3)
+#' str(cube)
+#' # elements will be NULL when not present in the obj file e.g. normals
+#' is.null(cube$shapes[[1]]$texcoords)
 #'
 #' # demonstrate direct conversion of result to rgl format
 #' if(require('rgl')) {
