@@ -22,7 +22,7 @@ test_that("can load an obj file", {
 test_that("can load file with mix of quads and triangles", {
   expect_is(mixed<-read.obj(system.file("obj/mixed.wavefront", package = "readobj"), triangulate = FALSE),
             "list")
-  expect_named(mixed$shapes[[1]], c("positions", "indices", "nvfaces","material_ids"))
+  expect_named(mixed$shapes[[1]], c("positions", "indices", "nvfaces"))
   expect_equal(as.integer(mixed$shapes[[1]]$nvfaces), rep(4:3,c(6,4)))
 })
 

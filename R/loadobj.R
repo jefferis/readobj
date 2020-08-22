@@ -47,11 +47,13 @@
 #'   (trimesh/quadmesh) 0-indexed (missing when there are no texture
 #'   coordinates)
 #'
-#'   \item nvfaces Raw vector specifying the number of vertices per face (only
-#'   present when triangulate=TRUE and there are a mixture of different numbers
-#'   of vertices per face.)
+#'   \item nvfaces Raw vector specifying the number of vertices per face
+#'   (missing unless \code{triangulate=FALSE} and there are a mixture of
+#'   different numbers of vertices per face.)
 #'
-#'   \item material_ids (0-indexed, -1 when not set) }
+#'   \item material_ids 0-indexed, -1 when not set (missing when no materials)
+#'
+#'   }
 #'
 #'   When \code{convert.rgl=TRUE} a list of class shapelist3d containing a
 #'   mesh3d for each object or group element in the original OBJ file. See
