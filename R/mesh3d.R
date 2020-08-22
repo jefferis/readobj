@@ -65,39 +65,82 @@ tinymaterial2rgl<-function(x){
 
 # convert individual tiny shape into an rgl mesh3d object
 tinyshape2mesh3d<-function(x) {
+  # standardize OBJ data
   vertices=x$positions
-  indices=x$indices+1
+  indices=x$indices+1L
+  if(length(x$normals)) {
+      normals=x$normals
+      normindices=ifelse(x$normindices == -1L, NA_integer_, x$normindices+1)
+  } else {
+      normals=NULL
+      normindices=NULL
+  }
   if(length(x$texcoords)) {
       texcoords=x$texcoords
-      texindices=ifelse(x$texindices == -1, NA_integer_, x$texindices+1)
-
-      # for each mesh vertex in (tex)indices find associated position and tex coordinate
-      dft=expand.grid(r=seq_len(nrow(indices)), c=seq_len(ncol(indices)))
-      dft$position=c(indices)
-      dft$texcoord=c(texindices)
-      # find our new duplicated vertices/texcoords indices
-      dfi=unique(dft[, 3:4])
-      dfi$id=seq_len(nrow(dfi))
-      dft=merge(dft, dfi, sort=FALSE)
-      dft=dft[order(dft$c, dft$r),]
-
-      # update vectices, texcoords, and indices with new duplicated indices
-      vertices=vertices[, dfi[, 1]]
-      # rgl::tmesh3d expects the transpose of texcoords but not vertices
-      texcoords=t(texcoords[, dfi[, 2]])
-      indices[,]=dft$id
-      # don't know if 'normals' line below works
-      # this assumes 'normals' of positive length is a matrix of same dimension as 'positions'
-      # and it needs to be transposed before being passed to rgl::tmesh3d
-      normals=if(length(x$normals)) normals <- t(x$normals[, dfi[, 1]]) else NULL
+      texindices=ifelse(x$texindices == -1L, NA_integer_, x$texindices+1)
   } else {
-      normals=if(length(x$normals)) normals <- t(x$normals) else NULL
       texcoords=NULL
+      texindices=NULL
   }
+  # if necessary duplicate vertices, normals, tex coordinates
+  if(!is.null(normals) && !is.null(texcoords)) {
+      if (!identical(indices, normindices) || !identical(indices, texindices)) {
+          # for each mesh vertex in (norm)indices find associated position, normal, and tex coordinate
+          dft=expand.grid(r=seq_len(nrow(indices)), c=seq_len(ncol(indices)))
+          dft$position=c(indices)
+          dft$normal=c(normindices)
+          dft$texcoord=c(texindices)
+          # find our new duplicated vertices/normal/tex coords indices
+          dfi=unique(dft[, 3:5])
+          dfi$id=seq_len(nrow(dfi))
+          dft=merge(dft, dfi, sort=FALSE)
+          dft=dft[order(dft$c, dft$r),]
+          # update vectices, normals, and indices with new duplicated indices
+          vertices=vertices[, dfi[, 1L]]
+          normals=normals[, dfi[, 2L]]
+          texcoords=texcoords[, dfi[, 3L]]
+          indices[,]=dft$id
+      }
+  } else if(is.null(normals) && !is.null(texcoords)) {
+      if(!identical(indices, texindices)) {
+          # for each mesh vertex in (tex)indices find associated position and tex coordinate
+          dft=expand.grid(r=seq_len(nrow(indices)), c=seq_len(ncol(indices)))
+          dft$position=c(indices)
+          dft$texcoord=c(texindices)
+          # find our new duplicated vertices/texcoords indices
+          dfi=unique(dft[, 3:4])
+          dfi$id=seq_len(nrow(dfi))
+          dft=merge(dft, dfi, sort=FALSE)
+          dft=dft[order(dft$c, dft$r),]
+          # update vectices, texcoords, and indices with new duplicated indices
+          vertices=vertices[, dfi[, 1L]]
+          texcoords=texcoords[, dfi[, 2L]]
+          indices[,]=dft$id
+      }
+  } else if(is.null(texcoords) && !is.null(normals)) {
+      if(!identical(indices, normindices)) {
+          # for each mesh vertex in (norm)indices find associated position and normal
+          dft=expand.grid(r=seq_len(nrow(indices)), c=seq_len(ncol(indices)))
+          dft$position=c(indices)
+          dft$normal=c(normindices)
+          # find our new duplicated vertices/normal indices
+          dfi=unique(dft[, 3:4])
+          dfi$id=seq_len(nrow(dfi))
+          dft=merge(dft, dfi, sort=FALSE)
+          dft=dft[order(dft$c, dft$r),]
+          # update vectices, normals, and indices with new duplicated indices
+          vertices=vertices[, dfi[, 1L]]
+          normals=normals[, dfi[, 2L]]
+          indices[,]=dft$id
+      }
+  }
+  # rgl::tmesh3d expects the transpose of texcoords and normals (but not vertices)
+  if (!is.null(normals)) normals=t(normals)
+  if (!is.null(texcoords)) texcoords=t(texcoords)
   m=rgl::tmesh3d(vertices, indices, homogeneous = FALSE,
                  normals = normals, texcoords = texcoords)
   # nb normals are expected to be 4 component in some places
-  if(length(m$normals) && nrow(m$normals)==3)
-    m$normals=rbind(m$normals, 1)
+  if(length(m$normals) && nrow(m$normals)==3L)
+    m$normals=rbind(m$normals, 1L)
   m
 }
