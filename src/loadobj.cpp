@@ -90,7 +90,9 @@ List loadobj(std::string thefile, std::string basepath="", bool triangulate=true
     if(mixedfaces) {
       sli["nvfaces"]=m.num_face_vertices;
     }
-    sli["material_ids"]=m.material_ids;
+    if(materials.size()>0) {
+      sli["material_ids"]=m.material_ids;
+    }
     sl[shapes[i].name]=sli;
   }
   for(unsigned int i=0; i<materials.size(); i++) {
