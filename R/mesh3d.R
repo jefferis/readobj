@@ -70,14 +70,14 @@ tinyshape2mesh3d<-function(x) {
   indices=x$indices+1L
   if(length(x$normals)) {
       normals=x$normals
-      normindices=ifelse(x$normindices == -1L, NA_integer_, x$normindices+1)
+      normindices=ifelse(x$normindices == -1L, NA_integer_, x$normindices+1L)
   } else {
       normals=NULL
       normindices=NULL
   }
   if(length(x$texcoords)) {
       texcoords=x$texcoords
-      texindices=ifelse(x$texindices == -1L, NA_integer_, x$texindices+1)
+      texindices=ifelse(x$texindices == -1L, NA_integer_, x$texindices+1L)
   } else {
       texcoords=NULL
       texindices=NULL
@@ -141,6 +141,6 @@ tinyshape2mesh3d<-function(x) {
                  normals = normals, texcoords = texcoords)
   # nb normals are expected to be 4 component in some places
   if(length(m$normals) && nrow(m$normals)==3L)
-    m$normals=rbind(m$normals, 1L)
+    m$normals=rbind(m$normals, 1)
   m
 }
