@@ -1,3 +1,7 @@
+# readobj (development version)
+
+* preserve texture cordinates in `tinyshape2mesh3d()` (thanks to @trevorld)
+
 # readobj 0.3.2
 
 * fixes a test error introduced by a change in object structure for latest
