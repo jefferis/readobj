@@ -53,3 +53,18 @@ test_that("can convert to rgl format", {
     expect_equal(tilesl, tilesl_baseline)
   }
 })
+
+
+test_that("can load more complex obj files", {
+  expect_is(tile<-read.obj(system.file("obj/tile.wavefront", package = "readobj"), triangulate = FALSE, convert.rgl = TRUE),
+            "shapelist3d")
+
+    expect_is(pawn <-
+              read.obj(system.file("obj/pawn.wavefront", package = "readobj")),
+            "list")
+  # try without triangulating
+  expect_is(pawn.not <-
+              read.obj(system.file("obj/pawn.wavefront", package = "readobj"), triangulate = FALSE),
+            "list")
+
+})
