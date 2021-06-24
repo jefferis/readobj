@@ -4,7 +4,7 @@
 \alias{read.obj}
 \title{Read a Wavefront OBJ 3D scene file into an R list}
 \usage{
-read.obj(f, materialspath = NULL, convert.rgl = FALSE)
+read.obj(f, materialspath = NULL, convert.rgl = FALSE, triangulate = TRUE)
 }
 \arguments{
 \item{f}{Path to an OBJ file}
@@ -16,6 +16,10 @@ from the OBJ file defined by \code{f}.}
 \item{convert.rgl}{Whether to convert the returned list to a
 \code{rgl::\link[rgl]{shapelist3d}} object containing
 \code{rgl::\link[rgl]{mesh3d}} objects.}
+
+\item{triangulate}{(default \code{TRUE}) Whether to convert all mesh faces to
+triangles. Note that only meshes with triangular or quad faces are
+supported.}
 }
 \value{
 When \code{convert.rgl=FALSE}, the default, a named list with items
@@ -23,17 +27,31 @@ When \code{convert.rgl=FALSE}, the default, a named list with items
   per object (shapes) or material (materials). Objects in the \code{shapes}
   list have the following structure \itemize{
 
-  \item positions 3xN set of 3D vertices
+  \item positions 3xN matrix of 3D vertices
 
-  \item normals 3xN set of normal directions for each vertex (has 3 rows and
-  0 cols when normals are not available)
-
-  \item texcoords vector containing unprocessed texture coordinates
-
-  \item indices 3/4xM set of indices into vertex array (trimesh/quadmesh)
+  \item indices 3/4xM matrix of indices into vertex array (trimesh/quadmesh)
   0-indexed
 
-  \item material_ids (0-indexed, -1 when not set) }
+  \item normals 3xN matrix of normal directions for each vertex (missing when
+  there are no normals)
+
+  \item normindices 3/4xM matrix of indices into normals array
+  (trimesh/quadmesh) 0-indexed (missing when there are no normals)
+
+  \item texcoords 2xN matrix of texture coordinates (missing when there are
+  no texture coordinates)
+
+  \item texindices 3/4xM matrix of indices into texcoords array
+  (trimesh/quadmesh) 0-indexed (missing when there are no texture
+  coordinates)
+
+  \item nvfaces Raw vector specifying the number of vertices per face
+  (missing unless \code{triangulate=FALSE} and there are a mixture of
+  different numbers of vertices per face.)
+
+  \item material_ids 0-indexed, -1 when not set (missing when no materials)
+
+  }
 
   When \code{convert.rgl=TRUE} a list of class shapelist3d containing a
   mesh3d for each object or group element in the original OBJ file. See
@@ -41,6 +59,18 @@ When \code{convert.rgl=FALSE}, the default, a named list with items
 }
 \description{
 Read a Wavefront OBJ 3D scene file into an R list
+}
+\details{
+\code{tinyobjloader} made some substantial changes to its data
+  structures after the first code snapshot was taken for the this package in
+  2015. In order to benefit from bug fixes, we have updated the coded in
+  2020, but we note that \code{tinyobjloader} now de-duplicates vertices more
+  aggressively e.g. in the situation where there are texture coordinates.
+
+  Note that some fields in the \code{tinyobjloader} return structure will be
+  omitted when they are not relevant for a given obj file. In this case, as
+  with any R list, the list element will have the value \code{NULL} when
+  tested. See examples.
 }
 \section{Sample files}{
  Note that at the request of the CRAN maintainers the
@@ -51,7 +81,9 @@ Read a Wavefront OBJ 3D scene file into an R list
 
 \examples{
 cube=read.obj(system.file("obj/cube.wavefront", package = "readobj"))
-str(cube, max.level = 3)
+str(cube)
+# elements will be NULL when not present in the obj file e.g. normals
+is.null(cube$shapes[[1]]$texcoords)
 
 # demonstrate direct conversion of result to rgl format
 if(require('rgl')) {

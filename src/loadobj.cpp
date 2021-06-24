@@ -4,22 +4,22 @@ using namespace Rcpp;
 #include "tiny_obj_loader.h"
 
 // [[Rcpp::export]]
-List loadobj(std::string thefile, std::string basepath="") {
+List loadobj(std::string thefile, std::string basepath="", bool triangulate=true) {
 
   std::vector<tinyobj::shape_t> shapes;
   std::vector<tinyobj::material_t> materials;
-  std::string err = tinyobj::LoadObj(shapes, materials, thefile.c_str(),
-                                     basepath.c_str());
+  tinyobj::attrib_t attrib;
+  std::string warn, err;
+  bool ok = tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err,
+                              thefile.c_str(), basepath.c_str(), triangulate);
 
-  if (!err.empty()) {
-    std::string warnstr="WARN: ";
-    if(err.compare(0, warnstr.length(), warnstr)==0) {
-      // it's a warning
+  if (!ok) {
+    stop(err);
+  } else {
+    // check for any warnings
+    if(warn.length()>0) {
       Function warning("warning");
-      warning(err);
-    } else {
-      // it's an error
-      stop(err);
+      warning(warn);
     }
   }
 
@@ -28,31 +28,71 @@ List loadobj(std::string thefile, std::string basepath="") {
   for(unsigned int i=0; i<shapes.size(); i++) {
     tinyobj::mesh_t m=shapes[i].mesh;
     /* typedef struct {
-      std::vector<float> positions;
-      std::vector<float> normals;
-      std::vector<float> texcoords;
-      std::vector<unsigned int> indices;
-      std::vector<int> material_ids; // per-mesh material ID
-    } mesh_t; */
-    if((m.positions.size() % 3) !=0) {
-      stop ("Number of vertices is not a multiple of 3 for object", i);
-    }
-    const size_t nv = m.positions.size() / 3L;
-    const size_t nn = m.normals.size() / 3L;
+     std::vector<index_t> indices;
+     std::vector<unsigned char> num_face_vertices;  // The number of vertices per
+     // face. 3 = polygon, 4 = quad,
+     // ... Up to 255.
+     std::vector<int> material_ids;                 // per-face material ID
+     std::vector<unsigned int> smoothing_group_ids;  // per-face smoothing group
+     // ID(0 = off. positive value
+     // = group id)
+     std::vector<tag_t> tags;                        // SubD tag
+    } mesh_t;*/
 
-    const size_t nfaces=m.material_ids.size();
-    // number of vertices per face
-    const size_t nv_face=m.indices.size()/nfaces;
+    const size_t nv = attrib.vertices.size() / 3L;
+    const size_t nn = attrib.normals.size() / 3L;
+    const size_t nt = attrib.texcoords.size() / 2L;
 
-    if((m.indices.size() % nv_face) != 0) {
-      stop("Number of vertices / mesh face is not constant in object", i);
+    const size_t nfaces=m.num_face_vertices.size();
+
+    const size_t maxfaces=*std::max_element(m.num_face_vertices.begin(), m.num_face_vertices.end());
+    const size_t minfaces=*std::min_element(m.num_face_vertices.begin(), m.num_face_vertices.end());
+    const bool mixedfaces = maxfaces!=minfaces;
+    const bool havetex = attrib.texcoords.size()>0;
+    const bool havenorm = nn > 0;
+
+    if(maxfaces>4 || minfaces<3) {
+      stop("I only accept objects with triangular or quad faces!");
     }
+
+    IntegerMatrix indices(maxfaces, nfaces);
+    IntegerMatrix texindices(maxfaces, havetex?nfaces:0L);
+    IntegerMatrix normindices(maxfaces, havenorm?nfaces:0L);
+
+    size_t index_offset = 0;
+    for (size_t f = 0; f < m.num_face_vertices.size(); f++) {
+      const int fv = m.num_face_vertices[f];
+      for (size_t v = 0; v < fv; v++) {
+        // access to vertex
+        tinyobj::index_t idx = m.indices[index_offset + v];
+        indices(v, f) = idx.vertex_index;
+        if(havetex) {
+          texindices(v, f) = idx.texcoord_index;
+        }
+        if(havenorm) {
+          normindices(v, f) = idx.normal_index;
+        }
+      }
+      index_offset += fv;
+    }
+
     List sli;
-    sli["positions"]=NumericMatrix(3L, nv, m.positions.begin());
-    sli["normals"]=NumericMatrix(3L, nn, m.normals.begin());
-    sli["texcoords"]=m.texcoords;
-    sli["indices"]=NumericMatrix(nv_face, nfaces, m.indices.begin());
-    sli["material_ids"]=m.material_ids;
+    sli["positions"]=NumericMatrix(3L, nv, attrib.vertices.begin());
+    sli["indices"]=indices;
+    if(havenorm) {
+      sli["normals"]=NumericMatrix(3L, nn, attrib.normals.begin());
+      sli["normindices"]=normindices;
+    }
+    if(havetex) {
+      sli["texcoords"]=NumericMatrix(2L, nt, attrib.texcoords.begin());
+      sli["texindices"]=texindices;
+    }
+    if(mixedfaces) {
+      sli["nvfaces"]=m.num_face_vertices;
+    }
+    if(materials.size()>0) {
+      sli["material_ids"]=m.material_ids;
+    }
     sl[shapes[i].name]=sli;
   }
   for(unsigned int i=0; i<materials.size(); i++) {
