@@ -2,7 +2,7 @@
 #'
 #' This package provides fast reading of Wavefront OBJ files with support for
 #' some material properties using the
-#' \href{https://github.com/syoyo/tinyobjloader}{tinyobjloader} C++ library. It
+#' \href{https://github.com/tinyobjloader/tinyobjloader}{tinyobjloader} C++ library. It
 #' is noticeably faster than the pure R \code{\link[rgl]{readOBJ}} implemented
 #' in the \code{rgl} package.
 #'
