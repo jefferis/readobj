@@ -1,6 +1,8 @@
 # readobj (development version)
 
-* preserve texture cordinates in `tinyshape2mesh3d()` (thanks to @trevorld)
+* upgrade the embedded version of `tinyobjloader` to v1.0.7
+  to support the triangulation of previously unsupported shapes (#6)
+* preserve texture coordinates in `tinyshape2mesh3d()` (thanks to @trevorld, #7)
 
 # readobj 0.3.2
 
