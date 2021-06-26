@@ -70,7 +70,8 @@ Read a Wavefront OBJ 3D scene file into an R list
   we note that \code{tinyobjloader} now de-duplicates vertices more
   aggressively e.g. in the situation where there are texture coordinates. We
   were forced to revert these de-duplication on the R side in order to allow
-  texture coordinate mapping for display in rgl.
+  texture coordinate mapping for display in rgl; note that this only happens
+  when there are texture coordinates or normals in the obj file.
 
   Note that some fields in the \code{tinyobjloader} return structure will be
   omitted when they are not relevant for a given obj file. In this case, as
