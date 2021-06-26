@@ -27,35 +27,37 @@ When \code{convert.rgl=FALSE}, the default, a named list with items
   per object (shapes) or material (materials). Objects in the \code{shapes}
   list have the following structure \itemize{
 
-  \item positions 3xN matrix of 3D vertices
+  \item \code{positions} 3 x N matrix of 3D vertices
 
-  \item indices 3/4xM matrix of indices into vertex array (trimesh/quadmesh)
-  0-indexed
+  \item \code{indices} 3/4 x M matrix of indices into vertex array
+  (trimesh/quadmesh) 0-indexed
 
-  \item normals 3xN matrix of normal directions for each vertex (missing when
-  there are no normals)
+  \item \code{normals} 3 x N matrix of normal directions for each vertex
+  (missing when there are no normals)
 
-  \item normindices 3/4xM matrix of indices into normals array
+  \item \code{normindices} 3/4 x M matrix of indices into normals array
   (trimesh/quadmesh) 0-indexed (missing when there are no normals)
 
-  \item texcoords 2xN matrix of texture coordinates (missing when there are
-  no texture coordinates)
+  \item \code{texcoords} 2 x N matrix of texture coordinates (missing when
+  there are no texture coordinates)
 
-  \item texindices 3/4xM matrix of indices into texcoords array
-  (trimesh/quadmesh) 0-indexed (missing when there are no texture
+  \item \code{texindices} 3/4 x M matrix of indices into \code{texcoords}
+  array (trimesh/quadmesh) 0-indexed (missing when there are no texture
   coordinates)
 
-  \item nvfaces Raw vector specifying the number of vertices per face
+  \item \code{nvfaces} Raw vector specifying the number of vertices per face
   (missing unless \code{triangulate=FALSE} and there are a mixture of
   different numbers of vertices per face.)
 
-  \item material_ids 0-indexed, -1 when not set (missing when no materials)
+  \item \code{material_ids} 0-indexed, -1 when not set (missing when no
+  materials)
 
   }
 
-  When \code{convert.rgl=TRUE} a list of class shapelist3d containing a
-  mesh3d for each object or group element in the original OBJ file. See
-  \code{\link{tinyobj2shapelist3d}} for details of rgl conversion.
+  When \code{convert.rgl=TRUE} a list of class \code{\link[rgl]{shapelist3d}}
+  containing a \code{\link[rgl]{mesh3d}} for each object or group element in
+  the original OBJ file. See \code{\link{tinyobj2shapelist3d}} for details of
+  rgl conversion.
 }
 \description{
 Read a Wavefront OBJ 3D scene file into an R list

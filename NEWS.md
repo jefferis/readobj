@@ -16,7 +16,7 @@
 
 # readobj 0.3
 
-* fix bug in .Call since RCpp update
+* fix bug in .Call since Rcpp update
 * documentation improvements
 * URL fixes preparing for CRAN
 

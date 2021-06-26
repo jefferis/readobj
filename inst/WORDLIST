@@ -1,0 +1,11 @@
+CMD
+OBJ
+Rcpp
+Rtools
+obj
+quadmesh
+rc
+rgl
+shapelist
+tinyobjloader
+trimesh
