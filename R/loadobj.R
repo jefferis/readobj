@@ -9,7 +9,8 @@
 #'   \code{rgl::\link[rgl]{mesh3d}} objects.
 #' @param triangulate (default \code{TRUE}) Whether to convert all mesh faces to
 #'   triangles. Note that only meshes with triangular or quad faces are
-#'   supported.
+#'   supported, so setting \code{triangulate=FALSE} will throw an error for more
+#'   complex files.
 #' @section Sample files: Note that at the request of the CRAN maintainers the
 #'   sample files have the file extension \code{.wavefront} instead of the
 #'   standard \code{.obj} because this triggers a false positive R CMD check

@@ -63,8 +63,6 @@ test_that("can load more complex obj files", {
               read.obj(system.file("obj/pawn.wavefront", package = "readobj")),
             "list")
   # try without triangulating
-  expect_is(pawn.not <-
-              read.obj(system.file("obj/pawn.wavefront", package = "readobj"), triangulate = FALSE),
-            "list")
+  expect_error(read.obj(system.file("obj/pawn.wavefront", package = "readobj"), triangulate = FALSE))
 
 })

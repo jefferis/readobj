@@ -19,7 +19,8 @@ from the OBJ file defined by \code{f}.}
 
 \item{triangulate}{(default \code{TRUE}) Whether to convert all mesh faces to
 triangles. Note that only meshes with triangular or quad faces are
-supported.}
+supported, so setting \code{triangulate=FALSE} will throw an error for more
+complex files.}
 }
 \value{
 When \code{convert.rgl=FALSE}, the default, a named list with items
