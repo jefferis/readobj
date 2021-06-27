@@ -81,8 +81,8 @@
 #'   shade3d(cuber)
 #' }
 read.obj <- function(f, materialspath=NULL, convert.rgl=FALSE, triangulate=TRUE) {
-  if(length(f)>1)
-    stop("I only know how to read single files!")
+  if(length(f)!=1)
+    stop("Please pass exactly one file to `read.obj`!")
   # expand any ~ etc
   f=path.expand(f)
   # set default materialspath
