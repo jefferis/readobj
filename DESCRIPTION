@@ -1,13 +1,13 @@
 Package: readobj
 Type: Package
 Title: Fast Reader for 'Wavefront' OBJ 3D Scene Files
-Version: 0.3.2.9003
+Version: 0.4
 Authors@R: c(
     person("Gregory", "Jefferis", email = "jefferis@gmail.com",
     role = c("aut", "cph", "cre"), comment = c(ORCID = "0000-0002-0587-9355")),
     person("Syoyo", "Fujita", role=c("aut", "cph"),
     comment="tiny_obj_loader.* are copyright Syoyo Fujita"),
-    person("Trevor L", "Davis", role="ctb")
+    person("Trevor L", "Davis", role="aut")
     )
 Description: Wraps 'tiny_obj_loader' C++ library for reading the 'Wavefront' OBJ
     3D file format including both mesh objects and materials files. The
@@ -21,8 +21,10 @@ Imports:
 LinkingTo: Rcpp
 Suggests:
     testthat,
-    rgl
+    rgl,
+    spelling
 URL: https://github.com/jefferis/readobj
 BugReports: https://github.com/jefferis/readobj/issues
 RoxygenNote: 7.1.1
 Encoding: UTF-8
+Language: en-GB

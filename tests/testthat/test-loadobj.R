@@ -1,7 +1,8 @@
 context("loadobj")
 
 test_that("can load an obj file", {
-  expect_error(read.obj(c("foo","bar")), "single")
+  expect_error(read.obj(character()))
+  expect_error(read.obj(c("foo","bar")), "exactly one")
   expect_error(read.obj("rhubarb"), "Cannot open file")
   expect_warning(read.obj(system.file("obj/cube_badmtl.wavefront", package = "readobj")),
                  'default material')
@@ -52,4 +53,17 @@ test_that("can convert to rgl format", {
     }
     expect_equal(tilesl, tilesl_baseline)
   }
+})
+
+
+test_that("can load more complex obj files", {
+  expect_is(tile<-read.obj(system.file("obj/tile.wavefront", package = "readobj"), triangulate = FALSE, convert.rgl = TRUE),
+            "shapelist3d")
+
+    expect_is(pawn <-
+              read.obj(system.file("obj/pawn.wavefront", package = "readobj")),
+            "list")
+  # try without triangulating
+  expect_error(read.obj(system.file("obj/pawn.wavefront", package = "readobj"), triangulate = FALSE))
+
 })

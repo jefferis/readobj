@@ -48,7 +48,7 @@ remotes::install_github("jefferis/readobj")
 Note: You will need a development environment able to compile code C++ to 
 install in this way. MacOS X users will likely need Xcode (see https://cran.r-project.org/). Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) to install this way.
 
-## Acknwoledgements
+## Acknowledgements
 This package wraps the tinyobjloader C++ library available at 
 https://github.com/tinyobjloader/tinyobjloader. Kudos to its author, Syoyo Fujita!
 
