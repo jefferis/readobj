@@ -1,4 +1,4 @@
-# readobj 0.4
+# readobj 0.4.0
 
 This version makes significant changes under the hood by updating
 `tinyobjloader` to enable triangulation of more complex shapes together with
