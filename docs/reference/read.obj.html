@@ -8,21 +8,29 @@
 
 <title>Read a Wavefront OBJ 3D scene file into an R list — read.obj • readobj</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +38,10 @@
 
 
 
-<meta property="og:title" content="Read a Wavefront OBJ 3D scene file into an R list — read.obj" />
 
+<meta property="og:title" content="Read a Wavefront OBJ 3D scene file into an R list — read.obj" />
 <meta property="og:description" content="Read a Wavefront OBJ 3D scene file into an R list" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,9 +55,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readobj</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -71,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -82,11 +91,10 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jefferis/readobj">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/jefferis/readobj/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -97,6 +105,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -108,13 +117,11 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Read a Wavefront OBJ 3D scene file into an R list</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>read.obj</span>(<span class='no'>f</span>, <span class='kw'>materialspath</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>convert.rgl</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>read.obj</span><span class='op'>(</span><span class='va'>f</span>, materialspath <span class='op'>=</span> <span class='cn'>NULL</span>, convert.rgl <span class='op'>=</span> <span class='cn'>FALSE</span>, triangulate <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -131,82 +138,101 @@ from the OBJ file defined by <code>f</code>.</p></td>
     <tr>
       <th>convert.rgl</th>
       <td><p>Whether to convert the returned list to a
-<code>rgl::<a href='https://www.rdocumentation.org/packages/rgl/topics/shapelist3d'>shapelist3d</a></code> object containing
-<code>rgl::<a href='https://www.rdocumentation.org/packages/rgl/topics/mesh3d'>mesh3d</a></code> objects.</p></td>
+<code>rgl::<a href='https://dmurdoch.github.io/rgl/dev/reference/shapelist3d.html'>shapelist3d</a></code> object containing
+<code>rgl::<a href='https://dmurdoch.github.io/rgl/dev/reference/mesh3d.html'>mesh3d</a></code> objects.</p></td>
+    </tr>
+    <tr>
+      <th>triangulate</th>
+      <td><p>(default <code>TRUE</code>) Whether to convert all mesh faces to
+triangles. Note that only meshes with triangular or quad faces are
+supported, so setting <code>triangulate=FALSE</code> will throw an error for more
+complex files.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>When <code>convert.rgl=FALSE</code>, the default, a named list with items
   <code>shapes</code> and <code>materials</code>, each containing sublists with one entry
   per object (shapes) or material (materials). Objects in the <code>shapes</code>
   list have the following structure</p><ul>
-<li><p>positions 3xN set of 3D vertices</p></li>
-<li><p>normals 3xN set of normal directions for each vertex (has 3 rows and
-  0 cols when normals are not available)</p></li>
-<li><p>texcoords vector containing unprocessed texture coordinates</p></li>
-<li><p>indices 3/4xM set of indices into vertex array (trimesh/quadmesh)
-  0-indexed</p></li>
-<li><p>material_ids (0-indexed, -1 when not set)</p></li>
+<li><p><code>positions</code> 3 x N matrix of 3D vertices</p></li>
+<li><p><code>indices</code> 3/4 x M matrix of indices into vertex array
+  (trimesh/quadmesh) 0-indexed</p></li>
+<li><p><code>normals</code> 3 x N matrix of normal directions for each vertex
+  (missing when there are no normals)</p></li>
+<li><p><code>normindices</code> 3/4 x M matrix of indices into normals array
+  (trimesh/quadmesh) 0-indexed (missing when there are no normals)</p></li>
+<li><p><code>texcoords</code> 2 x N matrix of texture coordinates (missing when
+  there are no texture coordinates)</p></li>
+<li><p><code>texindices</code> 3/4 x M matrix of indices into <code>texcoords</code>
+  array (trimesh/quadmesh) 0-indexed (missing when there are no texture
+  coordinates)</p></li>
+<li><p><code>nvfaces</code> Raw vector specifying the number of vertices per face
+  (missing unless <code>triangulate=FALSE</code> and there are a mixture of
+  different numbers of vertices per face.)</p></li>
+<li><p><code>material_ids</code> 0-indexed, -1 when not set (missing when no
+  materials)</p></li>
 </ul>
 
-<p>When <code>convert.rgl=FALSE</code> a list of class shapelist3d containing a
-  mesh3d for each object or group element in the original OBJ file. See
-  <code>tinyobj2shapelist3d</code> for details of rgl conversion.</p>
-    
+<p>When <code>convert.rgl=TRUE</code> a list of class <code><a href='https://dmurdoch.github.io/rgl/dev/reference/shapelist3d.html'>shapelist3d</a></code>
+  containing a <code><a href='https://dmurdoch.github.io/rgl/dev/reference/mesh3d.html'>mesh3d</a></code> for each object or group element in
+  the original OBJ file. See <code><a href='tinyobj2shapelist3d.html'>tinyobj2shapelist3d</a></code> for details of
+  rgl conversion.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>tinyobjloader</code> made some substantial changes to its data
+  structures after the first code snapshot was taken for the this package in
+  2015. In order to benefit from bug fixes, we updated the code in 2020 but
+  we note that <code>tinyobjloader</code> now de-duplicates vertices more
+  aggressively e.g. in the situation where there are normals or texture coordinates.
+  We were forced when converting to <code>rgl::<a href='https://dmurdoch.github.io/rgl/dev/reference/shapelist3d.html'>shapelist3d</a></code> objects
+  to revert these de-duplications on the R side
+  in order for display in rgl; note that this only happens
+  when there are texture coordinates and/or normals in the obj file.</p>
+<p>Note that some fields in the <code>tinyobjloader</code> return structure will be
+  omitted when they are not relevant for a given obj file. In this case, as
+  with any R list, the list element will have the value <code>NULL</code> when
+  tested. See examples.</p>
     <h2 class="hasAnchor" id="sample-files"><a class="anchor" href="#sample-files"></a>Sample files</h2>
 
     <p>Note that at the request of the CRAN maintainers the
   sample files have the file extension <code>.wavefront</code> instead of the
   standard <code>.obj</code> because this triggers a false positive R CMD check
   NOTE.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>tinyobj2shapelist3d</code>, <code>rgl::<a href='https://www.rdocumentation.org/packages/rgl/topics/writeOBJ'>readOBJ</a></code>
+    <div class='dont-index'><p><code><a href='tinyobj2shapelist3d.html'>tinyobj2shapelist3d</a></code>, <code>rgl::<a href='https://dmurdoch.github.io/rgl/dev/reference/writeOBJ.html'>readOBJ</a></code>
   for simpler, pure R implementation.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>cube</span><span class='kw'>=</span><span class='fu'>read.obj</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"obj/cube.wavefront"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"readobj"</span>))
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='no'>cube</span>, <span class='kw'>max.level</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; List of 2
+    <pre class="examples"><div class='input'><span class='va'>cube</span><span class='op'>=</span><span class='fu'>read.obj</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"obj/cube.wavefront"</span>, package <span class='op'>=</span> <span class='st'>"readobj"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>cube</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; List of 2
 #&gt;  $ shapes   :List of 6
-#&gt;   ..$ front :List of 5
-#&gt;   .. ..$ positions   : num [1:3, 1:4] 0 2 2 0 0 2 2 0 2 2 ...
-#&gt;   .. ..$ normals     : num[1:3, 0 ] 
-#&gt;   .. ..$ texcoords   : num(0) 
-#&gt;   .. ..$ indices     : num [1:3, 1:2] 0 1 2 0 2 3
+#&gt;   ..$ front cube :List of 3
+#&gt;   .. ..$ positions   : num [1:3, 1:8] 0 2 2 0 0 2 2 0 2 2 ...
+#&gt;   .. ..$ indices     : int [1:3, 1:2] 0 1 2 0 2 3
 #&gt;   .. ..$ material_ids: int [1:2] 0 0
-#&gt;   ..$ back  :List of 5
-#&gt;   .. ..$ positions   : num [1:3, 1:4] 2 2 0 2 0 0 0 0 0 0 ...
-#&gt;   .. ..$ normals     : num[1:3, 0 ] 
-#&gt;   .. ..$ texcoords   : num(0) 
-#&gt;   .. ..$ indices     : num [1:3, 1:2] 0 1 2 0 2 3
+#&gt;   ..$ back cube  :List of 3
+#&gt;   .. ..$ positions   : num [1:3, 1:8] 0 2 2 0 0 2 2 0 2 2 ...
+#&gt;   .. ..$ indices     : int [1:3, 1:2] 7 6 5 7 5 4
 #&gt;   .. ..$ material_ids: int [1:2] 0 0
-#&gt;   ..$ right :List of 5
-#&gt;   .. ..$ positions   : num [1:3, 1:4] 2 2 2 2 0 2 2 0 0 2 ...
-#&gt;   .. ..$ normals     : num[1:3, 0 ] 
-#&gt;   .. ..$ texcoords   : num(0) 
-#&gt;   .. ..$ indices     : num [1:3, 1:2] 0 1 2 0 2 3
+#&gt;   ..$ right cube :List of 3
+#&gt;   .. ..$ positions   : num [1:3, 1:8] 0 2 2 0 0 2 2 0 2 2 ...
+#&gt;   .. ..$ indices     : int [1:3, 1:2] 3 2 6 3 6 7
 #&gt;   .. ..$ material_ids: int [1:2] 1 1
-#&gt;   ..$ top   :List of 5
-#&gt;   .. ..$ positions   : num [1:3, 1:4] 0 2 0 0 2 2 2 2 2 2 ...
-#&gt;   .. ..$ normals     : num[1:3, 0 ] 
-#&gt;   .. ..$ texcoords   : num(0) 
-#&gt;   .. ..$ indices     : num [1:3, 1:2] 0 1 2 0 2 3
+#&gt;   ..$ top cube   :List of 3
+#&gt;   .. ..$ positions   : num [1:3, 1:8] 0 2 2 0 0 2 2 0 2 2 ...
+#&gt;   .. ..$ indices     : int [1:3, 1:2] 4 0 3 4 3 7
 #&gt;   .. ..$ material_ids: int [1:2] 0 0
-#&gt;   ..$ left  :List of 5
-#&gt;   .. ..$ positions   : num [1:3, 1:4] 0 2 0 0 0 0 0 0 2 0 ...
-#&gt;   .. ..$ normals     : num[1:3, 0 ] 
-#&gt;   .. ..$ texcoords   : num(0) 
-#&gt;   .. ..$ indices     : num [1:3, 1:2] 0 1 2 0 2 3
+#&gt;   ..$ left cube  :List of 3
+#&gt;   .. ..$ positions   : num [1:3, 1:8] 0 2 2 0 0 2 2 0 2 2 ...
+#&gt;   .. ..$ indices     : int [1:3, 1:2] 4 5 1 4 1 0
 #&gt;   .. ..$ material_ids: int [1:2] 2 2
-#&gt;   ..$ bottom:List of 5
-#&gt;   .. ..$ positions   : num [1:3, 1:4] 0 0 2 0 0 0 2 0 0 2 ...
-#&gt;   .. ..$ normals     : num[1:3, 0 ] 
-#&gt;   .. ..$ texcoords   : num(0) 
-#&gt;   .. ..$ indices     : num [1:3, 1:2] 0 1 2 0 2 3
+#&gt;   ..$ bottom cube:List of 3
+#&gt;   .. ..$ positions   : num [1:3, 1:8] 0 2 2 0 0 2 2 0 2 2 ...
+#&gt;   .. ..$ indices     : int [1:3, 1:2] 1 5 6 1 6 2
 #&gt;   .. ..$ material_ids: int [1:2] 0 0
 #&gt;  $ materials:List of 5
 #&gt;   ..$ white:List of 13
@@ -278,44 +304,41 @@ from the OBJ file defined by <code>f</code>.</p></td>
 #&gt;   .. ..$ ambient_texname : chr ""
 #&gt;   .. ..$ diffuse_texname : chr ""
 #&gt;   .. ..$ specular_texname: chr ""
-#&gt;   .. ..$ normal_texname  : chr ""</div><div class='input'>
+#&gt;   .. ..$ normal_texname  : chr ""</div><div class='input'><span class='co'># elements will be NULL when not present in the obj file e.g. normals</span>
+<span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>cube</span><span class='op'>$</span><span class='va'>shapes</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>$</span><span class='va'>texcoords</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
 <span class='co'># demonstrate direct conversion of result to rgl format</span>
-<span class='kw'>if</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>require</a></span>(<span class='st'>'rgl'</span>)) {
-  <span class='no'>cuber</span><span class='kw'>=</span><span class='fu'>read.obj</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>system.file</a></span>(<span class='st'>"obj/cube.wavefront"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"readobj"</span>),
-    <span class='kw'>convert.rgl</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/rgl/topics/mesh3d'>shade3d</a></span>(<span class='no'>cuber</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: rgl</span></div></pre>
+<span class='kw'>if</span><span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://github.com/dmurdoch/rgl'>'rgl'</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>cuber</span><span class='op'>=</span><span class='fu'>read.obj</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"obj/cube.wavefront"</span>, package <span class='op'>=</span> <span class='st'>"readobj"</span><span class='op'>)</span>,
+    convert.rgl<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+  <span class='fu'><a href='https://dmurdoch.github.io/rgl/dev/reference/shade3d.html'>shade3d</a></span><span class='op'>(</span><span class='va'>cuber</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: rgl</span></div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#sample-files">Sample files</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
-  <p>Developed by Gregory Jefferis, Syoyo Fujita.</p>
+  <p>Developed by Gregory Jefferis, Syoyo Fujita, Trevor L Davis.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
