@@ -2,6 +2,8 @@
 
 * Updates the bundled tinyobjloader library
 * Support for rendering textures on complex surfaces using rgl
+* Eliminates the note 'LazyData' is specified without a 'data' directory
+  present for the current CRAN version 0.3.2
 
 ## Test environments
 * local OS X install, R 4.1.0
