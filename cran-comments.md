@@ -1,12 +1,13 @@
 ## Remarks
 
-* fixes a test error introduced by a change in object structure for latest
-  version of rgl (thanks to Duncan Murdoch for the fix, #3)
+* Updates the bundled tinyobjloader library
+* Support for rendering textures on complex surfaces using rgl
 
 ## Test environments
-* local OS X install, R 3.5.2
-* travis-ci
-* win-builder (unstable) (2019-03-09 r76216)
+* local OS X install, R 4.1.0
+* win-builder R Under development (unstable) (2021-06-22 r80544)
+
+https://win-builder.r-project.org/lZnolNA4n7VE
 
 ## R CMD check results
 
