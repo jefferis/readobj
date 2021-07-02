@@ -33,10 +33,15 @@ tinyobj2shapelist3d<-function(x) {
 
   sl=lapply(x$shapes, tinyshape2mesh3d)
   # 1-indexed into material array
-  materialids=sapply(x$shapes, function(y) unique(y$material_ids))+1L
+  materialids=sapply(x$shapes, function(y) {
+    um=unique(y$material_ids)+1L
+    if(length(um)==0) um=-1L
+    um
+    })
+  # do we have any materials specified?
   if(!is.integer(materialids)) {
-    stop("Some object groups have more than one material id!")
-    warning("Keeping first only!")
+    warning("Some object groups have more than one material id! Keeping first only!")
+    materialids=sapply(materialids, head, 1)
   }
   for(i in which(materialids>0)) {
     sl[[i]]$material=mats[[materialids[i]]]
