@@ -1,15 +1,15 @@
 ## Remarks
 
-* Updates the bundled tinyobjloader library
-* Support for rendering textures on complex surfaces using rgl
-* Eliminates the note 'LazyData' is specified without a 'data' directory
-  present for the current CRAN version 0.3.2
+* fix for certain obj files without materials
+* this fixes an off-CRAN revdep error discovered after the v0.4.0 update
+* there are no remarks except for a win-builder note
+  Days since last update: 4
 
 ## Test environments
 * local OS X install, R 4.1.0
 * win-builder R Under development (unstable) (2021-06-22 r80544)
 
-https://win-builder.r-project.org/lZnolNA4n7VE
+https://win-builder.r-project.org/gB5xs9sK77U0/
 
 ## R CMD check results
 
@@ -20,4 +20,4 @@ https://win-builder.r-project.org/lZnolNA4n7VE
 
 ## Reverse dependencies
 
-There are no reverse dependencies.
+There are no reverse dependencies on CRAN.
