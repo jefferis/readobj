@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">readobj</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
       </span>
     </div>
 
@@ -114,9 +114,17 @@
       <small>Source: <a href='https://github.com/jefferis/readobj/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="readobj-041" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.1">
+<a href="#readobj-041" class="anchor"></a>readobj 0.4.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>fix problem with certain obj files that do not have materials now that tinyobjloader no longer returns a default material id(<a href='https://github.com/jefferis/readobj/issues/15'>#15</a>)</li>
+</ul>
+</div>
     <div id="readobj-040" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.0">
-<a href="#readobj-040" class="anchor"></a>readobj 0.4.0<small> Unreleased </small>
+<a href="#readobj-040" class="anchor"></a>readobj 0.4.0<small> 2021-06-28 </small>
 </h1>
 <p>This version makes significant changes under the hood by updating <code>tinyobjloader</code> to enable triangulation of more complex shapes together with support for rendering textures on such shapes. <a href='https://github.com/trevorld'>@trevorld</a> has been added as a package author due to his significant effort in making those changes.</p>
 <p>These internal changes will be reflected in the details of the mesh structures returned for more complex objects. Although they should render equivalently, (or better in the case of those with textures), this could be considered a breaking change.</p>
