@@ -1,3 +1,8 @@
+# readobj 0.4.1
+
+* fix problem with certain obj files that do not have materials now that 
+  tinyobjloader no longer returns a default material id(#15)
+
 # readobj 0.4.0
 
 This version makes significant changes under the hood by updating
