@@ -41,7 +41,7 @@ tinyobj2shapelist3d<-function(x) {
   # do we have any materials specified?
   if(!is.integer(materialids)) {
     warning("Some object groups have more than one material id! Keeping first only!")
-    materialids=sapply(materialids, head, 1)
+    materialids=sapply(materialids, utils::head, 1)
   }
   for(i in which(materialids>0)) {
     sl[[i]]$material=mats[[materialids[i]]]
