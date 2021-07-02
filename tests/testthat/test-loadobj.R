@@ -67,3 +67,9 @@ test_that("can load more complex obj files", {
   expect_error(read.obj(system.file("obj/pawn.wavefront", package = "readobj"), triangulate = FALSE))
 
 })
+
+
+test_that("can load obj files of rgl shapes written from nat", {
+  expect_is(icos<-read.obj(system.file("obj/icosahedron.wavefront", package = "readobj"), triangulate = FALSE, convert.rgl = TRUE),
+            "shapelist3d")
+})
